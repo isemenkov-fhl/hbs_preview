@@ -50,13 +50,43 @@ export function SMSPreview({ content }: SMSPreviewProps) {
               </div>
 
               {/* Message Content */}
-              <div className="p-4 bg-[#F2F2F7] flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 120px)' }}>
+              <div className="p-4 bg-white flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 180px)' }}>
                 <div className="flex flex-col items-start mb-2">
                   <div className="text-[11px] text-gray-500 mb-1.5 text-center w-full">{currentTime}</div>
-                  <div className="bg-[#E5E5EA] rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%] shadow-sm">
+                  <div className="bg-gray-200 rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%] shadow-sm">
                     <p className="text-[15px] leading-relaxed text-gray-900 whitespace-pre-wrap break-words">{content}</p>
                   </div>
                   <div className="text-[11px] text-gray-500 mt-1">Delivered</div>
+                </div>
+              </div>
+
+              {/* iOS Keyboard */}
+              <div className="bg-[#D1D5DB] px-2 py-1.5">
+                <div className="bg-white rounded-lg p-2 mb-1">
+                  <div className="grid grid-cols-10 gap-1 text-[10px]">
+                    <div className="col-span-10 flex gap-1 mb-1">
+                      {['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map(key => (
+                        <div key={key} className="flex-1 bg-white shadow-sm rounded py-1.5 text-center font-medium text-gray-900">{key}</div>
+                      ))}
+                    </div>
+                    <div className="col-span-10 flex gap-1 px-2">
+                      {['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'].map(key => (
+                        <div key={key} className="flex-1 bg-white shadow-sm rounded py-1.5 text-center font-medium text-gray-900">{key}</div>
+                      ))}
+                    </div>
+                    <div className="col-span-10 flex gap-1">
+                      <div className="w-8 bg-white shadow-sm rounded py-1.5 text-center">⇧</div>
+                      {['Z', 'X', 'C', 'V', 'B', 'N', 'M'].map(key => (
+                        <div key={key} className="flex-1 bg-white shadow-sm rounded py-1.5 text-center font-medium text-gray-900">{key}</div>
+                      ))}
+                      <div className="w-8 bg-white shadow-sm rounded py-1.5 text-center">⌫</div>
+                    </div>
+                    <div className="col-span-10 flex gap-1 mt-1">
+                      <div className="w-12 bg-white shadow-sm rounded py-1.5 text-center text-gray-600">123</div>
+                      <div className="flex-1 bg-white shadow-sm rounded py-1.5 text-center text-gray-400">space</div>
+                      <div className="w-12 bg-blue-500 text-white shadow-sm rounded py-1.5 text-center font-medium">↑</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -103,12 +133,40 @@ export function SMSPreview({ content }: SMSPreviewProps) {
               </div>
 
               {/* Message Content */}
-              <div className="p-4 bg-[#F0F2F5] flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 120px)' }}>
+              <div className="p-4 bg-[#E5DDD5] flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 180px)' }}>
                 <div className="flex flex-col items-start mb-2">
                   <div className="bg-white rounded-lg rounded-tl-none px-3.5 py-2.5 max-w-[80%] shadow-sm">
                     <p className="text-[15px] leading-relaxed text-gray-900 whitespace-pre-wrap break-words">{content}</p>
                     <div className="text-[11px] text-gray-500 text-right mt-1.5">{currentTime}</div>
                   </div>
+                </div>
+              </div>
+
+              {/* Android Keyboard */}
+              <div className="bg-[#E8EAED] px-1.5 py-1.5">
+                <div className="grid grid-cols-10 gap-1 text-[10px] mb-1">
+                  {['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map(key => (
+                    <div key={key} className="bg-white shadow rounded py-2 text-center font-medium text-gray-900">{key}</div>
+                  ))}
+                </div>
+                <div className="grid grid-cols-9 gap-1 text-[10px] mb-1 px-2">
+                  {['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'].map(key => (
+                    <div key={key} className="bg-white shadow rounded py-2 text-center font-medium text-gray-900">{key}</div>
+                  ))}
+                </div>
+                <div className="flex gap-1 text-[10px] mb-1">
+                  <div className="bg-white shadow rounded py-2 px-3 text-center">⇧</div>
+                  {['Z', 'X', 'C', 'V', 'B', 'N', 'M'].map(key => (
+                    <div key={key} className="flex-1 bg-white shadow rounded py-2 text-center font-medium text-gray-900">{key}</div>
+                  ))}
+                  <div className="bg-white shadow rounded py-2 px-3 text-center">⌫</div>
+                </div>
+                <div className="flex gap-1 text-[10px]">
+                  <div className="bg-white shadow rounded py-2 px-3 text-center text-gray-600">?123</div>
+                  <div className="bg-white shadow rounded py-2 px-2 text-center">🙂</div>
+                  <div className="flex-1 bg-white shadow rounded py-2 text-center text-gray-400">space</div>
+                  <div className="bg-white shadow rounded py-2 px-3 text-center text-gray-600">.</div>
+                  <div className="bg-white shadow rounded py-2 px-3 text-center">↵</div>
                 </div>
               </div>
             </div>

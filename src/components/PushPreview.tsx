@@ -60,8 +60,43 @@ export function PushPreview({ title, content }: PushPreviewProps) {
                 </div>
               </div>
 
-              {/* Bottom Indicator */}
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/30 rounded-full"></div>
+              {/* Bottom swipe area with keyboard */}
+              <div className="absolute bottom-0 left-0 right-0">
+                {/* Swipe Indicator */}
+                <div className="flex justify-center py-2">
+                  <div className="w-32 h-1 bg-white/30 rounded-full"></div>
+                </div>
+
+                {/* iOS Keyboard */}
+                <div className="bg-[#D1D5DB]/90 backdrop-blur-lg px-2 py-1.5">
+                  <div className="bg-white/90 rounded-lg p-2 mb-1">
+                    <div className="grid grid-cols-10 gap-1 text-[10px]">
+                      <div className="col-span-10 flex gap-1 mb-1">
+                        {['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map(key => (
+                          <div key={key} className="flex-1 bg-white shadow-sm rounded py-1.5 text-center font-medium text-gray-900">{key}</div>
+                        ))}
+                      </div>
+                      <div className="col-span-10 flex gap-1 px-2">
+                        {['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'].map(key => (
+                          <div key={key} className="flex-1 bg-white shadow-sm rounded py-1.5 text-center font-medium text-gray-900">{key}</div>
+                        ))}
+                      </div>
+                      <div className="col-span-10 flex gap-1">
+                        <div className="w-8 bg-white shadow-sm rounded py-1.5 text-center">⇧</div>
+                        {['Z', 'X', 'C', 'V', 'B', 'N', 'M'].map(key => (
+                          <div key={key} className="flex-1 bg-white shadow-sm rounded py-1.5 text-center font-medium text-gray-900">{key}</div>
+                        ))}
+                        <div className="w-8 bg-white shadow-sm rounded py-1.5 text-center">⌫</div>
+                      </div>
+                      <div className="col-span-10 flex gap-1 mt-1">
+                        <div className="w-12 bg-white shadow-sm rounded py-1.5 text-center text-gray-600">123</div>
+                        <div className="flex-1 bg-white shadow-sm rounded py-1.5 text-center text-gray-400">space</div>
+                        <div className="w-12 bg-blue-500 text-white shadow-sm rounded py-1.5 text-center font-medium">↑</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -121,18 +156,32 @@ export function PushPreview({ title, content }: PushPreviewProps) {
                 </div>
               </div>
 
-              {/* Navigation Buttons */}
-              <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-8 text-white">
-                <button className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                  </svg>
-                </button>
-                <button className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </button>
+              {/* Android Keyboard */}
+              <div className="absolute bottom-0 left-0 right-0 bg-[#E8EAED]/90 backdrop-blur-lg px-1.5 py-1.5">
+                <div className="grid grid-cols-10 gap-1 text-[10px] mb-1">
+                  {['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map(key => (
+                    <div key={key} className="bg-white shadow rounded py-2 text-center font-medium text-gray-900">{key}</div>
+                  ))}
+                </div>
+                <div className="grid grid-cols-9 gap-1 text-[10px] mb-1 px-2">
+                  {['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'].map(key => (
+                    <div key={key} className="bg-white shadow rounded py-2 text-center font-medium text-gray-900">{key}</div>
+                  ))}
+                </div>
+                <div className="flex gap-1 text-[10px] mb-1">
+                  <div className="bg-white shadow rounded py-2 px-3 text-center">⇧</div>
+                  {['Z', 'X', 'C', 'V', 'B', 'N', 'M'].map(key => (
+                    <div key={key} className="flex-1 bg-white shadow rounded py-2 text-center font-medium text-gray-900">{key}</div>
+                  ))}
+                  <div className="bg-white shadow rounded py-2 px-3 text-center">⌫</div>
+                </div>
+                <div className="flex gap-1 text-[10px]">
+                  <div className="bg-white shadow rounded py-2 px-3 text-center text-gray-600">?123</div>
+                  <div className="bg-white shadow rounded py-2 px-2 text-center">🙂</div>
+                  <div className="flex-1 bg-white shadow rounded py-2 text-center text-gray-400">space</div>
+                  <div className="bg-white shadow rounded py-2 px-3 text-center text-gray-600">.</div>
+                  <div className="bg-white shadow rounded py-2 px-3 text-center">↵</div>
+                </div>
               </div>
             </div>
           </div>

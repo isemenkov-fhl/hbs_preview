@@ -501,7 +501,7 @@ export default function Home() {
             </div>
 
             {/* Preview Content */}
-            <div className="flex-1 overflow-auto bg-gray-100 dark:bg-gray-950 p-6" key={reloadKey}>
+            <div className="flex-1 overflow-auto bg-gray-100 dark:bg-gray-800 p-6" key={reloadKey}>
               {!renderedContent ? (
                 <div className="h-full flex items-center justify-center">
                   <div className="text-center">
