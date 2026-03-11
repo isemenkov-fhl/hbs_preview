@@ -112,9 +112,9 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col lg:flex-row max-w-[1800px] mx-auto w-full gap-6 p-6">
+      <div className="flex-1 flex flex-col xl:flex-row max-w-[2000px] mx-auto w-full gap-6 p-6">
         {/* Editor Panel */}
-        <div className="w-full lg:w-1/2 flex flex-col gap-4">
+        <div className="w-full xl:w-[40%] flex flex-col gap-4">
           <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
             {/* Editor Header */}
             <div className="bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
@@ -159,34 +159,37 @@ export default function Home() {
               </span>
             </div>
           </div>
+        </div>
 
-          {/* Variables Panel */}
-          {variables.length > 0 && (
-            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden">
-              <div className="bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                  Template Variables ({variables.length})
+        {/* Variables Panel - Separate Column */}
+        {variables.length > 0 && (
+          <div className="w-full xl:w-[25%] flex flex-col gap-4">
+            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
+              <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                <h3 className="text-sm font-semibold text-white">
+                  Template Variables
                 </h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  Dynamic parameters with generated dummy data
+                <p className="text-xs text-blue-50 mt-1">
+                  {variables.length} {variables.length === 1 ? 'parameter' : 'parameters'} detected
                 </p>
               </div>
-              <div className="p-4 max-h-64 overflow-y-auto">
-                <div className="space-y-2">
+              <div className="flex-1 overflow-y-auto p-4">
+                <div className="space-y-3">
                   {variables.map((variable) => (
                     <div
                       key={variable}
-                      className="flex items-start justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-700"
+                      className="p-3 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow"
                     >
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <code className="text-sm font-mono font-semibold text-blue-600 dark:text-blue-400">
-                            {`{{${variable}}}`}
-                          </code>
-                        </div>
-                        <div className="mt-1 text-sm text-gray-700 dark:text-gray-300 break-words">
-                          <span className="text-xs text-gray-500 dark:text-gray-400">Value: </span>
-                          <span className="font-medium">{String(dummyData[variable])}</span>
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                        <code className="text-sm font-mono font-semibold text-blue-600 dark:text-blue-400">
+                          {`{{${variable}}}`}
+                        </code>
+                      </div>
+                      <div className="pl-4 border-l-2 border-blue-200 dark:border-blue-800">
+                        <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Generated Value:</div>
+                        <div className="text-sm text-gray-900 dark:text-gray-100 font-medium break-words">
+                          {String(dummyData[variable])}
                         </div>
                       </div>
                     </div>
@@ -194,11 +197,11 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Preview Panel */}
-        <div className="w-full lg:w-1/2 flex flex-col gap-4">
+        <div className={`w-full ${variables.length > 0 ? 'xl:w-[35%]' : 'xl:w-[60%]'} flex flex-col gap-4`}>
           <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
             {/* Preview Header with Tabs */}
             <div className="bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
