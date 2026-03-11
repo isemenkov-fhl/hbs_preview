@@ -62,7 +62,8 @@ export default function Home() {
 
   // Re-render when template content or dummy data changes
   useEffect(() => {
-    if (templateContent && Object.keys(dummyData).length > 0) {
+    if (templateContent) {
+      // Render even if there are no variables (empty dummyData is fine)
       const rendered = renderTemplate(templateContent, dummyData);
       setRenderedContent(rendered);
     } else {
