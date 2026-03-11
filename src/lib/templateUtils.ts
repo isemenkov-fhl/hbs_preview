@@ -21,10 +21,11 @@ export function detectTemplateType(content: string): TemplateType {
 
 /**
  * Extracts Handlebars variables from template content
- * Matches patterns like {{variableName}}, {{#if condition}}, etc.
+ * Matches patterns like {{variableName}}, {{{variableName}}}, {{#if condition}}, etc.
  */
 export function extractHandlebarsVariables(content: string): string[] {
-  const variableRegex = /\{\{([^#\/}][^}]*)\}\}/g;
+  // Match both double {{}} and triple {{{}}} braces
+  const variableRegex = /\{\{\{?([^#\/}][^}]*?)\}?\}\}/g;
   const variables = new Set<string>();
   let match;
 
@@ -51,7 +52,9 @@ export function generateDummyData(variables: string[]): Record<string, any> {
     email: 'john.doe@example.com',
     name: 'John Doe',
     firstName: 'John',
+    first_name: 'John',
     lastName: 'Doe',
+    last_name: 'Doe',
     code: '123456',
     verificationCode: '123456',
     otp: '123456',
@@ -72,6 +75,11 @@ export function generateDummyData(variables: string[]): Record<string, any> {
     total: '$29.99',
     date: new Date().toLocaleDateString(),
     time: new Date().toLocaleTimeString(),
+    // Additional mappings for examples
+    information_type: 'mobile number',
+    old_value: '+63 917 123 4567',
+    new_value: '+63 917 987 6543',
+    allowed_time: 'March 11, 2024 8:30 PM',
   };
 
   variables.forEach(variable => {

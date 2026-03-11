@@ -16,14 +16,14 @@ export function ViberPreview({ content }: ViberPreviewProps) {
       {/* iOS Device */}
       <div className="flex flex-col items-center">
         <h3 className="text-sm font-semibold mb-4 text-gray-700 dark:text-gray-300">iOS</h3>
-        <div className="relative w-full max-w-[375px]">
+        <div className="relative w-full max-w-[340px]">
           {/* iPhone Frame */}
-          <div className="bg-black rounded-[3rem] p-3 shadow-2xl">
+          <div className="bg-black rounded-[3rem] p-2.5 shadow-2xl">
             {/* Notch */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-black rounded-b-3xl z-10"></div>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-36 h-6 bg-black rounded-b-3xl z-10"></div>
 
             {/* Screen */}
-            <div className="bg-white rounded-[2.5rem] overflow-hidden aspect-[9/19.5]">
+            <div className="bg-white rounded-[2.5rem] overflow-hidden" style={{ height: '600px' }}>
               {/* Status Bar */}
               <div className="bg-[#7360F2] px-6 py-3 flex justify-between items-center text-xs font-semibold text-white">
                 <span>{currentTime}</span>
@@ -58,11 +58,17 @@ export function ViberPreview({ content }: ViberPreviewProps) {
               </div>
 
               {/* Message Content */}
-              <div className="p-4 bg-white flex-1">
+              <div className="p-4 bg-white flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 180px)' }}>
                 <div className="flex flex-col items-start mb-2">
-                  <div className="text-xs text-gray-500 mb-1">{currentTime}</div>
-                  <div className="bg-[#F2F2F7] rounded-2xl rounded-tl-sm px-4 py-3 max-w-[85%] shadow-sm border border-gray-200">
-                    <p className="text-sm text-gray-900 whitespace-pre-wrap break-words">{content}</p>
+                  <div className="text-[11px] text-gray-500 mb-1.5 text-center w-full">{currentTime}</div>
+                  <div className="bg-[#F2F2F7] rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%] shadow-sm border border-gray-200">
+                    <p className="text-[15px] leading-relaxed text-gray-900 whitespace-pre-wrap break-words">{content}</p>
+                  </div>
+                  <div className="flex items-center gap-1 mt-1">
+                    <svg className="w-3.5 h-3.5 text-[#7360F2]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-[11px] text-gray-500">Read</span>
                   </div>
                 </div>
               </div>
@@ -93,11 +99,11 @@ export function ViberPreview({ content }: ViberPreviewProps) {
       {/* Android Device */}
       <div className="flex flex-col items-center">
         <h3 className="text-sm font-semibold mb-4 text-gray-700 dark:text-gray-300">Android</h3>
-        <div className="relative w-full max-w-[375px]">
+        <div className="relative w-full max-w-[340px]">
           {/* Android Frame */}
-          <div className="bg-gray-900 rounded-[2.5rem] p-2 shadow-2xl">
+          <div className="bg-gray-900 rounded-[2.5rem] p-2.5 shadow-2xl">
             {/* Screen */}
-            <div className="bg-white rounded-[2rem] overflow-hidden aspect-[9/19.5]">
+            <div className="bg-white rounded-[2rem] overflow-hidden" style={{ height: '600px' }}>
               {/* Status Bar */}
               <div className="bg-[#7360F2] px-4 py-2 flex justify-between items-center text-xs text-white">
                 <span className="font-medium">{currentTime}</span>
@@ -132,16 +138,17 @@ export function ViberPreview({ content }: ViberPreviewProps) {
               </div>
 
               {/* Message Content */}
-              <div className="p-4 bg-[#F7F7F7] flex-1 min-h-[400px]">
+              <div className="p-4 bg-[#F7F7F7] flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 180px)' }}>
                 <div className="flex flex-col items-start mb-2">
-                  <div className="bg-white rounded-lg rounded-tl-sm px-3 py-2 max-w-[85%] shadow-sm border border-gray-200">
-                    <p className="text-sm text-gray-900 whitespace-pre-wrap break-words">{content}</p>
-                    <div className="flex items-center gap-1 text-[10px] text-gray-500 text-right mt-1">
-                      <span>{currentTime}</span>
-                      <svg className="w-3 h-3 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
+                  <div className="text-[11px] text-gray-500 mb-1.5 text-center w-full">{currentTime}</div>
+                  <div className="bg-white rounded-lg rounded-tl-sm px-3.5 py-2.5 max-w-[80%] shadow-sm border border-gray-200">
+                    <p className="text-[15px] leading-relaxed text-gray-900 whitespace-pre-wrap break-words">{content}</p>
+                  </div>
+                  <div className="flex items-center gap-1 mt-1">
+                    <span className="text-[11px] text-gray-500">{currentTime}</span>
+                    <svg className="w-3.5 h-3.5 text-[#7360F2]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
                   </div>
                 </div>
               </div>

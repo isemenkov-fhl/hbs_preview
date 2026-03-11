@@ -19,14 +19,14 @@ export function PushPreview({ title, content }: PushPreviewProps) {
       {/* iOS Device */}
       <div className="flex flex-col items-center">
         <h3 className="text-sm font-semibold mb-4 text-gray-700 dark:text-gray-300">iOS</h3>
-        <div className="relative w-full max-w-[375px]">
+        <div className="relative w-full max-w-[340px]">
           {/* iPhone Frame */}
-          <div className="bg-black rounded-[3rem] p-3 shadow-2xl">
+          <div className="bg-black rounded-[3rem] p-2.5 shadow-2xl">
             {/* Notch */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-black rounded-b-3xl z-10"></div>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-36 h-6 bg-black rounded-b-3xl z-10"></div>
 
             {/* Screen - Lock Screen Background */}
-            <div className="bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-[2.5rem] overflow-hidden aspect-[9/19.5] relative">
+            <div className="bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-[2.5rem] overflow-hidden relative" style={{ height: '600px' }}>
               {/* Lock Screen Time */}
               <div className="absolute top-20 left-0 right-0 text-center text-white">
                 <div className="text-6xl font-light tracking-tight">9:41</div>
@@ -52,8 +52,8 @@ export function PushPreview({ title, content }: PushPreviewProps) {
                   </div>
 
                   {/* Notification Content */}
-                  <div className="px-3 py-3">
-                    <p className="text-sm text-gray-900 leading-snug line-clamp-4">
+                  <div className="px-3 py-2.5">
+                    <p className="text-[15px] text-gray-900 leading-relaxed whitespace-pre-wrap break-words">
                       {content}
                     </p>
                   </div>
@@ -70,11 +70,11 @@ export function PushPreview({ title, content }: PushPreviewProps) {
       {/* Android Device */}
       <div className="flex flex-col items-center">
         <h3 className="text-sm font-semibold mb-4 text-gray-700 dark:text-gray-300">Android</h3>
-        <div className="relative w-full max-w-[375px]">
+        <div className="relative w-full max-w-[340px]">
           {/* Android Frame */}
-          <div className="bg-gray-900 rounded-[2.5rem] p-2 shadow-2xl">
+          <div className="bg-gray-900 rounded-[2.5rem] p-2.5 shadow-2xl">
             {/* Screen - Lock Screen Background */}
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-[2rem] overflow-hidden aspect-[9/19.5] relative">
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-[2rem] overflow-hidden relative" style={{ height: '600px' }}>
               {/* Status Bar */}
               <div className="absolute top-0 left-0 right-0 px-4 py-2 flex justify-between items-center text-white text-xs z-20">
                 <span className="font-medium">{currentTime}</span>
@@ -114,7 +114,7 @@ export function PushPreview({ title, content }: PushPreviewProps) {
 
                   {/* Notification Content */}
                   <div className="px-4 pb-3">
-                    <p className="text-sm text-gray-300 leading-relaxed line-clamp-3">
+                    <p className="text-[15px] text-gray-300 leading-relaxed whitespace-pre-wrap break-words">
                       {content}
                     </p>
                   </div>

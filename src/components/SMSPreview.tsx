@@ -16,14 +16,14 @@ export function SMSPreview({ content }: SMSPreviewProps) {
       {/* iOS Device */}
       <div className="flex flex-col items-center">
         <h3 className="text-sm font-semibold mb-4 text-gray-700 dark:text-gray-300">iOS</h3>
-        <div className="relative w-full max-w-[375px]">
+        <div className="relative w-full max-w-[340px]">
           {/* iPhone Frame */}
-          <div className="bg-black rounded-[3rem] p-3 shadow-2xl">
+          <div className="bg-black rounded-[3rem] p-2.5 shadow-2xl">
             {/* Notch */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-black rounded-b-3xl z-10"></div>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-36 h-6 bg-black rounded-b-3xl z-10"></div>
 
             {/* Screen */}
-            <div className="bg-white rounded-[2.5rem] overflow-hidden aspect-[9/19.5]">
+            <div className="bg-white rounded-[2.5rem] overflow-hidden" style={{ height: '600px' }}>
               {/* Status Bar */}
               <div className="bg-gray-50 px-6 py-3 flex justify-between items-center text-xs font-semibold">
                 <span>{currentTime}</span>
@@ -50,12 +50,13 @@ export function SMSPreview({ content }: SMSPreviewProps) {
               </div>
 
               {/* Message Content */}
-              <div className="p-4 bg-white flex-1">
+              <div className="p-4 bg-white flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 120px)' }}>
                 <div className="flex flex-col items-start mb-2">
-                  <div className="text-xs text-gray-500 mb-1">{currentTime}</div>
-                  <div className="bg-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 max-w-[85%] shadow-sm">
-                    <p className="text-sm text-gray-900 whitespace-pre-wrap break-words">{content}</p>
+                  <div className="text-[11px] text-gray-500 mb-1.5 text-center w-full">{currentTime}</div>
+                  <div className="bg-gray-200 rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%] shadow-sm">
+                    <p className="text-[15px] leading-relaxed text-gray-900 whitespace-pre-wrap break-words">{content}</p>
                   </div>
+                  <div className="text-[11px] text-gray-500 mt-1">Delivered</div>
                 </div>
               </div>
             </div>
@@ -66,11 +67,11 @@ export function SMSPreview({ content }: SMSPreviewProps) {
       {/* Android Device */}
       <div className="flex flex-col items-center">
         <h3 className="text-sm font-semibold mb-4 text-gray-700 dark:text-gray-300">Android</h3>
-        <div className="relative w-full max-w-[375px]">
+        <div className="relative w-full max-w-[340px]">
           {/* Android Frame */}
-          <div className="bg-gray-900 rounded-[2.5rem] p-2 shadow-2xl">
+          <div className="bg-gray-900 rounded-[2.5rem] p-2.5 shadow-2xl">
             {/* Screen */}
-            <div className="bg-white rounded-[2rem] overflow-hidden aspect-[9/19.5]">
+            <div className="bg-white rounded-[2rem] overflow-hidden" style={{ height: '600px' }}>
               {/* Status Bar */}
               <div className="bg-white px-4 py-2 flex justify-between items-center text-xs">
                 <span className="font-medium">{currentTime}</span>
@@ -102,11 +103,11 @@ export function SMSPreview({ content }: SMSPreviewProps) {
               </div>
 
               {/* Message Content */}
-              <div className="p-4 bg-[#E5DDD5] flex-1 min-h-[400px]">
+              <div className="p-4 bg-[#E5DDD5] flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 120px)' }}>
                 <div className="flex flex-col items-start mb-2">
-                  <div className="bg-white rounded-lg rounded-tl-none px-3 py-2 max-w-[85%] shadow-sm">
-                    <p className="text-sm text-gray-900 whitespace-pre-wrap break-words">{content}</p>
-                    <div className="text-[10px] text-gray-500 text-right mt-1">{currentTime}</div>
+                  <div className="bg-white rounded-lg rounded-tl-none px-3.5 py-2.5 max-w-[80%] shadow-sm">
+                    <p className="text-[15px] leading-relaxed text-gray-900 whitespace-pre-wrap break-words">{content}</p>
+                    <div className="text-[11px] text-gray-500 text-right mt-1.5">{currentTime}</div>
                   </div>
                 </div>
               </div>

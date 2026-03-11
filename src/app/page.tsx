@@ -28,6 +28,10 @@ export default function Home() {
   const [dummyData, setDummyData] = useState<Record<string, any>>({});
   const [reloadKey, setReloadKey] = useState(0);
 
+  // Resizable panels state
+  const [editorWidth, setEditorWidth] = useState(40); // percentage
+  const [isDragging, setIsDragging] = useState(false);
+
   useEffect(() => {
     // Auto-detect template type when content changes
     if (templateContent) {
@@ -139,6 +143,42 @@ export default function Home() {
     setDummyData(generatedData);
   };
 
+  // Resizable panel handlers
+  const handleMouseDown = () => {
+    setIsDragging(true);
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return;
+
+      const containerWidth = window.innerWidth;
+      const newWidth = (e.clientX / containerWidth) * 100;
+
+      // Constrain between 20% and 70%
+      const constrainedWidth = Math.min(Math.max(newWidth, 20), 70);
+      setEditorWidth(constrainedWidth);
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      document.body.style.cursor = 'col-resize';
+      document.body.style.userSelect = 'none';
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    };
+  }, [isDragging]);
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col">
       {/* Header */}
@@ -225,9 +265,12 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col xl:flex-row max-w-[2000px] mx-auto w-full gap-6 p-6">
+      <div className="flex-1 flex flex-col xl:flex-row max-w-[2000px] mx-auto w-full gap-0 p-6">
         {/* Editor Panel */}
-        <div className="w-full xl:w-[40%] flex flex-col gap-4">
+        <div
+          className="w-full flex flex-col gap-4 pr-2"
+          style={{ width: `${editorWidth}%` }}
+        >
           <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
             {/* Editor Header */}
             <div className="bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
@@ -274,9 +317,21 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Draggable Divider */}
+        <div
+          className="hidden xl:flex items-center justify-center cursor-col-resize group hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
+          style={{ width: '12px' }}
+          onMouseDown={handleMouseDown}
+        >
+          <div className="w-1 h-16 bg-gray-300 dark:bg-gray-600 rounded-full group-hover:bg-blue-500 dark:group-hover:bg-blue-400 transition-colors" />
+        </div>
+
         {/* Variables Panel - Separate Column */}
         {variables.length > 0 && (
-          <div className="w-full xl:w-[25%] flex flex-col gap-4">
+          <div
+            className="w-full flex flex-col gap-4 px-2"
+            style={{ width: '25%' }}
+          >
             <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
               <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
                 <div className="flex items-center justify-between">
@@ -340,7 +395,14 @@ export default function Home() {
         )}
 
         {/* Preview Panel */}
-        <div className={`w-full ${variables.length > 0 ? 'xl:w-[35%]' : 'xl:w-[60%]'} flex flex-col gap-4`}>
+        <div
+          className="w-full flex flex-col gap-4 pl-2"
+          style={{
+            width: variables.length > 0
+              ? `calc(${100 - editorWidth - 25}% - 12px)`
+              : `calc(${100 - editorWidth}% - 12px)`
+          }}
+        >
           <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
             {/* Preview Header with Tabs */}
             <div className="bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
