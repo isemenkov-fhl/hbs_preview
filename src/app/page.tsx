@@ -8,6 +8,17 @@ import { PushPreview } from '@/components/PushPreview';
 import { detectTemplateType, extractHandlebarsVariables, generateDummyData, TemplateType } from '@/lib/templateUtils';
 import { renderTemplate } from '@/lib/handlebarsRenderer';
 
+// List of available example templates
+const EXAMPLE_TEMPLATES = [
+  { name: 'Email - Personal Info Update', file: 'email.hbs', type: 'email' as TemplateType },
+  { name: 'Email - Alternative 1', file: 'email copy.hbs', type: 'email' as TemplateType },
+  { name: 'Email - Alternative 2', file: 'email copy 2.hbs', type: 'email' as TemplateType },
+  { name: 'SMS - Basic', file: 'sms.hbs', type: 'sms' as TemplateType },
+  { name: 'SMS - Virtual Card', file: 'sms copy.hbs', type: 'sms' as TemplateType },
+  { name: 'SMS - Credit Approval', file: 'sms copy 2.hbs', type: 'sms' as TemplateType },
+  { name: 'Push - Notification', file: 'push.hbs', type: 'push' as TemplateType },
+];
+
 export default function Home() {
   const [templateContent, setTemplateContent] = useState('');
   const [templateType, setTemplateType] = useState<TemplateType>('email');
@@ -15,6 +26,7 @@ export default function Home() {
   const [renderedContent, setRenderedContent] = useState('');
   const [variables, setVariables] = useState<string[]>([]);
   const [dummyData, setDummyData] = useState<Record<string, any>>({});
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
     // Auto-detect template type when content changes
@@ -85,6 +97,27 @@ export default function Home() {
     }
   };
 
+  const handleLoadExample = async (filename: string, type: TemplateType) => {
+    try {
+      const response = await fetch(`/examples/${filename}`);
+      const text = await response.text();
+      setTemplateContent(text);
+      setTemplateType(type);
+
+      if (type === 'push') {
+        setPushTitle('New Notification');
+      } else {
+        setPushTitle('');
+      }
+    } catch (error) {
+      console.error('Error loading example:', error);
+    }
+  };
+
+  const handleReloadPreview = () => {
+    setReloadKey(prev => prev + 1);
+  };
+
   const handleVariableChange = (variable: string, value: string) => {
     setDummyData(prevData => ({
       ...prevData,
@@ -119,32 +152,73 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Sample Templates */}
-          <div className="flex gap-2">
-            <button
-              onClick={() => handleLoadSample('email')}
-              className="px-3 py-1.5 text-sm bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-md transition-colors"
+          {/* Example Templates Dropdown */}
+          <div className="flex gap-3">
+            <select
+              onChange={(e) => {
+                const example = EXAMPLE_TEMPLATES.find(t => t.file === e.target.value);
+                if (example) {
+                  handleLoadExample(example.file, example.type);
+                }
+              }}
+              className="px-4 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 rounded-md hover:border-blue-500 dark:hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors cursor-pointer"
+              defaultValue=""
             >
-              Load Email Sample
-            </button>
-            <button
-              onClick={() => handleLoadSample('sms')}
-              className="px-3 py-1.5 text-sm bg-green-50 hover:bg-green-100 dark:bg-green-900/20 dark:hover:bg-green-900/30 text-green-700 dark:text-green-300 rounded-md transition-colors"
-            >
-              Load SMS Sample
-            </button>
-            <button
-              onClick={() => handleLoadSample('push')}
-              className="px-3 py-1.5 text-sm bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/20 dark:hover:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-md transition-colors"
-            >
-              Load Push Sample
-            </button>
-            <button
-              onClick={() => handleLoadSample('viber')}
-              className="px-3 py-1.5 text-sm bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-900/20 dark:hover:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-md transition-colors"
-            >
-              Load Viber Sample
-            </button>
+              <option value="" disabled>Load Example Template</option>
+              <optgroup label="Email Templates">
+                {EXAMPLE_TEMPLATES.filter(t => t.type === 'email').map(template => (
+                  <option key={template.file} value={template.file}>
+                    {template.name}
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup label="SMS Templates">
+                {EXAMPLE_TEMPLATES.filter(t => t.type === 'sms').map(template => (
+                  <option key={template.file} value={template.file}>
+                    {template.name}
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup label="Push Templates">
+                {EXAMPLE_TEMPLATES.filter(t => t.type === 'push').map(template => (
+                  <option key={template.file} value={template.file}>
+                    {template.name}
+                  </option>
+                ))}
+              </optgroup>
+            </select>
+
+            {/* Quick Access Buttons */}
+            <div className="flex gap-2 border-l border-gray-300 dark:border-gray-600 pl-3">
+              <button
+                onClick={() => handleLoadSample('email')}
+                className="px-3 py-1.5 text-sm bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-md transition-colors"
+                title="Load simple email sample"
+              >
+                Email
+              </button>
+              <button
+                onClick={() => handleLoadSample('sms')}
+                className="px-3 py-1.5 text-sm bg-green-50 hover:bg-green-100 dark:bg-green-900/20 dark:hover:bg-green-900/30 text-green-700 dark:text-green-300 rounded-md transition-colors"
+                title="Load simple SMS sample"
+              >
+                SMS
+              </button>
+              <button
+                onClick={() => handleLoadSample('push')}
+                className="px-3 py-1.5 text-sm bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/20 dark:hover:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-md transition-colors"
+                title="Load simple push sample"
+              >
+                Push
+              </button>
+              <button
+                onClick={() => handleLoadSample('viber')}
+                className="px-3 py-1.5 text-sm bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-900/20 dark:hover:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-md transition-colors"
+                title="Load simple Viber sample"
+              >
+                Viber
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -271,6 +345,16 @@ export default function Home() {
             <div className="bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100">Preview</h2>
+                <button
+                  onClick={handleReloadPreview}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-md transition-colors"
+                  title="Reload preview"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  Reload
+                </button>
               </div>
 
               {/* Type Switcher Tabs */}
@@ -322,7 +406,7 @@ export default function Home() {
             </div>
 
             {/* Preview Content */}
-            <div className="flex-1 overflow-auto bg-gray-100 dark:bg-gray-950 p-6">
+            <div className="flex-1 overflow-auto bg-gray-100 dark:bg-gray-950 p-6" key={reloadKey}>
               {!renderedContent ? (
                 <div className="h-full flex items-center justify-center">
                   <div className="text-center">
@@ -336,10 +420,10 @@ export default function Home() {
                 </div>
               ) : (
                 <>
-                  {templateType === 'email' && <EmailPreview content={renderedContent} />}
-                  {templateType === 'sms' && <SMSPreview content={renderedContent} />}
-                  {templateType === 'push' && <PushPreview title={renderedPushTitle} content={renderedContent} />}
-                  {templateType === 'viber' && <ViberPreview content={renderedContent} />}
+                  {templateType === 'email' && <EmailPreview content={renderedContent} key={`email-${reloadKey}`} />}
+                  {templateType === 'sms' && <SMSPreview content={renderedContent} key={`sms-${reloadKey}`} />}
+                  {templateType === 'push' && <PushPreview title={renderedPushTitle} content={renderedContent} key={`push-${reloadKey}`} />}
+                  {templateType === 'viber' && <ViberPreview content={renderedContent} key={`viber-${reloadKey}`} />}
                 </>
               )}
             </div>
