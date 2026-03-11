@@ -1,69 +1,168 @@
-# Agent Instructions
+# Handlebars Template Preview - Project Overview
 
-> This file is mirrored across CLAUDE.md, AGENTS.md, and GEMINI.md so the same instructions load in any AI environment.
+## Project Purpose
 
-You operate within a 3-layer architecture that separates concerns to maximize reliability. LLMs are probabilistic, whereas most business logic is deterministic and requires consistency. This system fixes that mismatch.
+This is a production-ready web application for previewing Handlebars templates across multiple message formats: Email, SMS, Push Notifications, and Viber. It allows users to paste template content and instantly see how it renders with dummy data across different platforms and devices.
 
-## The 3-Layer Architecture
+## Architecture
 
-**Layer 1: Directive (What to do)**
-- Basically just SOPs written in Markdown, live in `directives/`
-- Define the goals, inputs, tools/scripts to use, outputs, and edge cases
-- Natural language instructions, like you'd give a mid-level employee
+### Tech Stack
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS 4
+- **Template Engine**: Handlebars
+- **Deployment**: Vercel
 
-**Layer 2: Orchestration (Decision making)**
-- This is you. Your job: intelligent routing.
-- Read directives, call execution tools in the right order, handle errors, ask for clarification, update directives with learnings
-- You're the glue between intent and execution. E.g you don't try scraping websites yourself—you read `directives/scrape_website.md` and come up with inputs/outputs and then run `execution/scrape_single_site.py`
+### Project Structure
 
-**Layer 3: Execution (Doing the work)**
-- Deterministic Python scripts in `execution/`
-- Environment variables, api tokens, etc are stored in `.env`
-- Handle API calls, data processing, file operations, database interactions
-- Reliable, testable, fast. Use scripts instead of manual work.
+```
+src/
+├── app/
+│   ├── page.tsx           # Main application UI
+│   ├── layout.tsx         # Root layout with metadata
+│   └── globals.css        # Global styles
+├── components/
+│   ├── EmailPreview.tsx   # Email rendering in iframe
+│   ├── SMSPreview.tsx     # iOS/Android SMS mockups
+│   ├── ViberPreview.tsx   # iOS/Android Viber mockups
+│   └── PushPreview.tsx    # iOS/Android push notification mockups
+└── lib/
+    ├── templateUtils.ts    # Type detection, variable extraction, dummy data
+    └── handlebarsRenderer.ts # Template compilation & rendering
 
-**Why this works:** if you do everything yourself, errors compound. 90% accuracy per step = 59% success over 5 steps. The solution is push complexity into deterministic code. That way you just focus on decision-making.
+public/
+├── sample_email.hbs       # Sample email template
+├── sample_sms.hbs         # Sample SMS template
+├── sample_push.hbs        # Sample push notification template
+└── sample_viber.hbs       # Sample Viber template
+```
 
-## Operating Principles
+## Key Features
 
-**1. Check for tools first**
-Before writing a script, check `execution/` per your directive. Only create new scripts if none exist.
+### 1. Template Type Auto-Detection
+- **Email**: Detects HTML tags (`<html>`, `<body>`, etc.)
+- **SMS/Viber/Push**: Defaults to SMS for plain text
+- Users can manually override via tabs
 
-**2. Self-anneal when things break**
-- Read error message and stack trace
-- Fix the script and test it again (unless it uses paid tokens/credits/etc—in which case you check w user first)
-- Update the directive with what you learned (API limits, timing, edge cases)
-- Example: you hit an API rate limit → you then look into API → find a batch endpoint that would fix → rewrite script to accommodate → test → update directive.
+### 2. Multi-Platform Previews
 
-**3. Update directives as you learn**
-Directives are living documents. When you discover API constraints, better approaches, common errors, or timing expectations—update the directive. But don't create or overwrite directives without asking unless explicitly told to. Directives are your instruction set and must be preserved (and improved upon over time, not extemporaneously used and then discarded).
+**Email**
+- Full HTML rendering in sandboxed iframe
+- Gmail-style header with sender info
+- Supports all HTML/CSS (tables, inline styles, media queries)
 
-## Self-annealing loop
+**SMS**
+- iOS: iMessage-style blue bubbles
+- Android: WhatsApp-style interface
+- Realistic device frames with status bars
 
-Errors are learning opportunities. When something breaks:
-1. Fix it
-2. Update the tool
-3. Test tool, make sure it works
-4. Update directive to include new flow
-5. System is now stronger
+**Push Notifications**
+- iOS: Lock screen notification with gradient background
+- Android: Dark material design notification
+- Separate title field for push notifications
 
-## File Organization
+**Viber**
+- iOS/Android: Purple-branded Viber interface
+- Business account styling
+- Read receipts and timestamps
 
-**Deliverables vs Intermediates:**
-- **Deliverables**: Google Sheets, Google Slides, or other cloud-based outputs that the user can access
-- **Intermediates**: Temporary files needed during processing
+### 3. Handlebars Features
 
-**Directory structure:**
-- `.tmp/` - All intermediate files (dossiers, scraped data, temp exports). Never commit, always regenerated.
-- `execution/` - Python scripts (the deterministic tools)
-- `directives/` - SOPs in Markdown (the instruction set)
-- `.env` - Environment variables and API keys
-- `credentials.json`, `token.json` - Google OAuth credentials (required files, in `.gitignore`)
+**Supported Syntax**
+- Variables: `{{variableName}}`
+- Conditionals: `{{#if}}`, `{{else}}`, `{{/if}}`
+- Loops: `{{#each}}`, `{{/each}}`
+- Helpers: `eq`, `ne`, `gt`, `lt`, `and`, `or`
 
-**Key principle:** Local files are only for processing. Deliverables live in cloud services (Google Sheets, Slides, etc.) where the user can access them. Everything in `.tmp/` can be deleted and regenerated.
+**Dummy Data Generation**
+- Automatically detects variable types by name patterns
+- Pre-configured mappings for common names (userName, email, code, etc.)
+- Generic fallbacks for unknown variables
+- Displays all extracted variables with their values in UI
 
-## Summary
+### 4. User Interface
 
-You sit between human intent (directives) and deterministic execution (Python scripts). Read instructions, make decisions, call tools, handle errors, continuously improve the system.
+**Editor Panel (Left)**
+- Syntax highlighting for Handlebars
+- Character count
+- Auto-detection indicator
+- Conditional push title field
+- Sample template quick-load buttons
 
-Be pragmatic. Be reliable. Self-anneal.
+**Preview Panel (Right)**
+- Type switcher tabs (Email/SMS/Push/Viber)
+- Live rendering on every keystroke
+- Responsive device mockups
+- Dark mode support
+
+**Variables Panel (Below Editor)**
+- List of all template variables
+- Shows variable name and dummy value
+- Scrollable for templates with many variables
+- Only appears when variables are detected
+
+## Development Commands
+
+```bash
+npm run dev    # Start development server (http://localhost:3000)
+npm run build  # Production build
+npm start      # Serve production build
+npm run lint   # Run ESLint
+```
+
+## Deployment
+
+### Vercel (Recommended)
+```bash
+vercel          # Deploy to Vercel
+```
+
+Configuration is in `vercel.json`:
+- Framework: Next.js
+- Build command: `npm run build`
+- Output directory: `.next`
+
+### Manual
+Build artifacts are in `.next/` and can be deployed to any Node.js hosting platform.
+
+## Key Implementation Details
+
+### Template Rendering Flow
+1. User pastes template → `setTemplateContent()`
+2. Auto-detect type → `detectTemplateType()`
+3. Extract variables → `extractHandlebarsVariables()`
+4. Generate dummy data → `generateDummyData()`
+5. Compile & render → `Handlebars.compile()` → `template(data)`
+6. Display in appropriate preview component
+
+### Security Considerations
+- Email iframe uses `sandbox="allow-same-origin"` to prevent XSS
+- No external script execution
+- All data processing happens client-side
+- No sensitive data storage
+
+### Responsive Design
+- Mobile: Stacked vertical layout
+- Desktop: Side-by-side editor/preview
+- Device mockups scale appropriately
+- Max width constraints for readability
+
+## Future Enhancement Ideas
+
+- Custom dummy data editing
+- Template saving/loading from local storage
+- Export rendered HTML/text
+- Copy to clipboard functionality
+- Multiple template tabs
+- Variable highlighting in editor
+- Real-time collaboration
+- Template validation warnings
+- More device mockups (tablets, web)
+
+## Maintenance Notes
+
+- Sample templates in `public/` for quick testing
+- All components are client-side (`'use client'`)
+- No API routes needed (pure client-side rendering)
+- Handlebars helpers registered globally in `handlebarsRenderer.ts`
+- Type detection logic in `templateUtils.ts` can be extended for more formats
