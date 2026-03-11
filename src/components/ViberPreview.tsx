@@ -58,10 +58,10 @@ export function ViberPreview({ content }: ViberPreviewProps) {
               </div>
 
               {/* Message Content */}
-              <div className="p-4 bg-white flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 180px)' }}>
+              <div className="p-4 bg-[#F8F8FC] flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 180px)' }}>
                 <div className="flex flex-col items-start mb-2">
                   <div className="text-[11px] text-gray-500 mb-1.5 text-center w-full">{currentTime}</div>
-                  <div className="bg-[#F2F2F7] rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%] shadow-sm border border-gray-200">
+                  <div className="bg-[#F0F0F5] rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%] shadow-sm">
                     <p className="text-[15px] leading-relaxed text-gray-900 whitespace-pre-wrap break-words">{content}</p>
                   </div>
                   <div className="flex items-center gap-1 mt-1">
@@ -138,10 +138,10 @@ export function ViberPreview({ content }: ViberPreviewProps) {
               </div>
 
               {/* Message Content */}
-              <div className="p-4 bg-[#F7F7F7] flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 180px)' }}>
+              <div className="p-4 bg-[#F8F8FC] flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 180px)' }}>
                 <div className="flex flex-col items-start mb-2">
                   <div className="text-[11px] text-gray-500 mb-1.5 text-center w-full">{currentTime}</div>
-                  <div className="bg-white rounded-lg rounded-tl-sm px-3.5 py-2.5 max-w-[80%] shadow-sm border border-gray-200">
+                  <div className="bg-[#F0F0F5] rounded-lg rounded-tl-sm px-3.5 py-2.5 max-w-[80%] shadow-sm">
                     <p className="text-[15px] leading-relaxed text-gray-900 whitespace-pre-wrap break-words">{content}</p>
                   </div>
                   <div className="flex items-center gap-1 mt-1">

@@ -28,9 +28,25 @@ export default function Home() {
   const [dummyData, setDummyData] = useState<Record<string, any>>({});
   const [reloadKey, setReloadKey] = useState(0);
 
+  // Theme state
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
   // Resizable panels state
   const [editorWidth, setEditorWidth] = useState(40); // percentage
   const [isDragging, setIsDragging] = useState(false);
+
+  // Apply theme on mount and when changed
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
   useEffect(() => {
     // Auto-detect template type when content changes
@@ -193,8 +209,24 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Example Templates Dropdown */}
-          <div className="flex gap-3">
+          {/* Example Templates Dropdown & Theme Toggle */}
+          <div className="flex gap-3 items-center">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
+              title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {isDarkMode ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </button>
             <select
               onChange={(e) => {
                 const example = EXAMPLE_TEMPLATES.find(t => t.file === e.target.value);

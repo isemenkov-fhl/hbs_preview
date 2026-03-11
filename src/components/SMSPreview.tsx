@@ -50,10 +50,10 @@ export function SMSPreview({ content }: SMSPreviewProps) {
               </div>
 
               {/* Message Content */}
-              <div className="p-4 bg-white flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 120px)' }}>
+              <div className="p-4 bg-[#F2F2F7] flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 120px)' }}>
                 <div className="flex flex-col items-start mb-2">
                   <div className="text-[11px] text-gray-500 mb-1.5 text-center w-full">{currentTime}</div>
-                  <div className="bg-gray-200 rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%] shadow-sm">
+                  <div className="bg-[#E5E5EA] rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%] shadow-sm">
                     <p className="text-[15px] leading-relaxed text-gray-900 whitespace-pre-wrap break-words">{content}</p>
                   </div>
                   <div className="text-[11px] text-gray-500 mt-1">Delivered</div>
@@ -103,7 +103,7 @@ export function SMSPreview({ content }: SMSPreviewProps) {
               </div>
 
               {/* Message Content */}
-              <div className="p-4 bg-[#E5DDD5] flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 120px)' }}>
+              <div className="p-4 bg-[#F0F2F5] flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 120px)' }}>
                 <div className="flex flex-col items-start mb-2">
                   <div className="bg-white rounded-lg rounded-tl-none px-3.5 py-2.5 max-w-[80%] shadow-sm">
                     <p className="text-[15px] leading-relaxed text-gray-900 whitespace-pre-wrap break-words">{content}</p>
