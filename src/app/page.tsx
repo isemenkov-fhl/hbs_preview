@@ -25,20 +25,38 @@ export default function Home() {
   }, [templateContent]);
 
   useEffect(() => {
-    // Render template with dummy data
+    // Extract variables and generate dummy data only for new variables
     if (templateContent) {
       const extractedVars = extractHandlebarsVariables(templateContent);
-      const generatedData = generateDummyData(extractedVars);
-      const rendered = renderTemplate(templateContent, generatedData);
-      setRenderedContent(rendered);
       setVariables(extractedVars);
-      setDummyData(generatedData);
+
+      // Only generate data for new variables, preserve user-edited values
+      setDummyData(prevData => {
+        const generatedData = generateDummyData(extractedVars);
+        const newData: Record<string, any> = {};
+
+        extractedVars.forEach(variable => {
+          // Keep existing value if it exists, otherwise use generated value
+          newData[variable] = prevData[variable] !== undefined ? prevData[variable] : generatedData[variable];
+        });
+
+        return newData;
+      });
     } else {
-      setRenderedContent('');
       setVariables([]);
       setDummyData({});
     }
   }, [templateContent]);
+
+  // Re-render when template content or dummy data changes
+  useEffect(() => {
+    if (templateContent && Object.keys(dummyData).length > 0) {
+      const rendered = renderTemplate(templateContent, dummyData);
+      setRenderedContent(rendered);
+    } else {
+      setRenderedContent('');
+    }
+  }, [templateContent, dummyData]);
 
   // Also render push title if in push mode
   const renderedPushTitle = React.useMemo(() => {
@@ -65,6 +83,26 @@ export default function Home() {
     } catch (error) {
       console.error('Error loading sample:', error);
     }
+  };
+
+  const handleVariableChange = (variable: string, value: string) => {
+    setDummyData(prevData => ({
+      ...prevData,
+      [variable]: value
+    }));
+  };
+
+  const handleResetVariable = (variable: string) => {
+    const generatedData = generateDummyData([variable]);
+    setDummyData(prevData => ({
+      ...prevData,
+      [variable]: generatedData[variable]
+    }));
+  };
+
+  const handleResetAllVariables = () => {
+    const generatedData = generateDummyData(variables);
+    setDummyData(generatedData);
   };
 
   return (
@@ -166,12 +204,23 @@ export default function Home() {
           <div className="w-full xl:w-[25%] flex flex-col gap-4">
             <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
               <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                <h3 className="text-sm font-semibold text-white">
-                  Template Variables
-                </h3>
-                <p className="text-xs text-blue-50 mt-1">
-                  {variables.length} {variables.length === 1 ? 'parameter' : 'parameters'} detected
-                </p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-semibold text-white">
+                      Template Variables
+                    </h3>
+                    <p className="text-xs text-blue-50 mt-1">
+                      {variables.length} {variables.length === 1 ? 'parameter' : 'parameters'} detected
+                    </p>
+                  </div>
+                  <button
+                    onClick={handleResetAllVariables}
+                    className="px-3 py-1.5 text-xs font-medium bg-white/20 hover:bg-white/30 text-white rounded-md transition-colors"
+                    title="Reset all to defaults"
+                  >
+                    Reset All
+                  </button>
+                </div>
               </div>
               <div className="flex-1 overflow-y-auto p-4">
                 <div className="space-y-3">
@@ -180,17 +229,32 @@ export default function Home() {
                       key={variable}
                       className="p-3 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow"
                     >
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                        <code className="text-sm font-mono font-semibold text-blue-600 dark:text-blue-400">
-                          {`{{${variable}}}`}
-                        </code>
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <div className="flex items-center gap-2 flex-1 min-w-0">
+                          <div className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></div>
+                          <code className="text-sm font-mono font-semibold text-blue-600 dark:text-blue-400 truncate">
+                            {`{{${variable}}}`}
+                          </code>
+                        </div>
+                        <button
+                          onClick={() => handleResetVariable(variable)}
+                          className="text-xs text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors flex-shrink-0"
+                          title="Reset to default"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                          </svg>
+                        </button>
                       </div>
                       <div className="pl-4 border-l-2 border-blue-200 dark:border-blue-800">
-                        <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Generated Value:</div>
-                        <div className="text-sm text-gray-900 dark:text-gray-100 font-medium break-words">
-                          {String(dummyData[variable])}
-                        </div>
+                        <label className="text-xs text-gray-500 dark:text-gray-400 mb-1 block">Value:</label>
+                        <input
+                          type="text"
+                          value={String(dummyData[variable])}
+                          onChange={(e) => handleVariableChange(variable, e.target.value)}
+                          className="w-full px-2 py-1.5 text-sm text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="Enter value..."
+                        />
                       </div>
                     </div>
                   ))}
