@@ -13,6 +13,8 @@ export default function Home() {
   const [templateType, setTemplateType] = useState<TemplateType>('email');
   const [pushTitle, setPushTitle] = useState('');
   const [renderedContent, setRenderedContent] = useState('');
+  const [variables, setVariables] = useState<string[]>([]);
+  const [dummyData, setDummyData] = useState<Record<string, any>>({});
 
   useEffect(() => {
     // Auto-detect template type when content changes
@@ -25,12 +27,16 @@ export default function Home() {
   useEffect(() => {
     // Render template with dummy data
     if (templateContent) {
-      const variables = extractHandlebarsVariables(templateContent);
-      const dummyData = generateDummyData(variables);
-      const rendered = renderTemplate(templateContent, dummyData);
+      const extractedVars = extractHandlebarsVariables(templateContent);
+      const generatedData = generateDummyData(extractedVars);
+      const rendered = renderTemplate(templateContent, generatedData);
       setRenderedContent(rendered);
+      setVariables(extractedVars);
+      setDummyData(generatedData);
     } else {
       setRenderedContent('');
+      setVariables([]);
+      setDummyData({});
     }
   }, [templateContent]);
 
@@ -153,6 +159,42 @@ export default function Home() {
               </span>
             </div>
           </div>
+
+          {/* Variables Panel */}
+          {variables.length > 0 && (
+            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden">
+              <div className="bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  Template Variables ({variables.length})
+                </h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  Dynamic parameters with generated dummy data
+                </p>
+              </div>
+              <div className="p-4 max-h-64 overflow-y-auto">
+                <div className="space-y-2">
+                  {variables.map((variable) => (
+                    <div
+                      key={variable}
+                      className="flex items-start justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-700"
+                    >
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <code className="text-sm font-mono font-semibold text-blue-600 dark:text-blue-400">
+                            {`{{${variable}}}`}
+                          </code>
+                        </div>
+                        <div className="mt-1 text-sm text-gray-700 dark:text-gray-300 break-words">
+                          <span className="text-xs text-gray-500 dark:text-gray-400">Value: </span>
+                          <span className="font-medium">{String(dummyData[variable])}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Preview Panel */}
