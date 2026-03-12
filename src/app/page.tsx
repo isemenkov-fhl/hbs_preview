@@ -240,73 +240,39 @@ export default function Home() {
           </div>
 
           {/* Example Templates Dropdown */}
-          <div className="flex gap-3 items-center">
-            <select
-              onChange={(e) => {
-                const example = EXAMPLE_TEMPLATES.find(t => t.file === e.target.value);
-                if (example) {
-                  handleLoadExample(example.file, example.type);
-                }
-              }}
-              className="px-4 py-2 text-sm bg-white border border-[var(--color-border-primary)] text-[var(--color-text-primary)] rounded-md hover:border-[var(--color-brand-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-primary)] transition-colors cursor-pointer"
-              defaultValue=""
-            >
-              <option value="" disabled>Load Example Template</option>
-              <optgroup label="Email Templates">
-                {EXAMPLE_TEMPLATES.filter(t => t.type === 'email').map(template => (
-                  <option key={template.file} value={template.file}>
-                    {template.name}
-                  </option>
-                ))}
-              </optgroup>
-              <optgroup label="SMS Templates">
-                {EXAMPLE_TEMPLATES.filter(t => t.type === 'sms').map(template => (
-                  <option key={template.file} value={template.file}>
-                    {template.name}
-                  </option>
-                ))}
-              </optgroup>
-              <optgroup label="Push Templates">
-                {EXAMPLE_TEMPLATES.filter(t => t.type === 'push').map(template => (
-                  <option key={template.file} value={template.file}>
-                    {template.name}
-                  </option>
-                ))}
-              </optgroup>
-            </select>
-
-            {/* Quick Access Buttons */}
-            <div className="flex gap-2 border-l border-[var(--color-border-primary)] pl-3">
-              <button
-                onClick={() => handleLoadSample('email')}
-                className="px-3 py-1.5 text-sm bg-[var(--brand-coral-50)] hover:bg-[var(--brand-coral-100)] text-[var(--brand-coral-700)] rounded-md transition-colors"
-                title="Load simple email sample"
-              >
-                Email
-              </button>
-              <button
-                onClick={() => handleLoadSample('sms')}
-                className="px-3 py-1.5 text-sm bg-[var(--brand-turquoise-50)] hover:bg-[var(--brand-turquoise-100)] text-[var(--brand-turquoise-700)] rounded-md transition-colors"
-                title="Load simple SMS sample"
-              >
-                SMS
-              </button>
-              <button
-                onClick={() => handleLoadSample('push')}
-                className="px-3 py-1.5 text-sm bg-[var(--message-green-50)] hover:bg-[var(--message-green-100)] text-[var(--message-green-700)] rounded-md transition-colors"
-                title="Load simple push sample"
-              >
-                Push
-              </button>
-              <button
-                onClick={() => handleLoadSample('viber')}
-                className="px-3 py-1.5 text-sm bg-[var(--message-blue-100)] hover:bg-[var(--message-blue-200)] text-[var(--message-blue-700)] rounded-md transition-colors"
-                title="Load simple Viber sample"
-              >
-                Viber
-              </button>
-            </div>
-          </div>
+          <select
+            onChange={(e) => {
+              const example = EXAMPLE_TEMPLATES.find(t => t.file === e.target.value);
+              if (example) {
+                handleLoadExample(example.file, example.type);
+              }
+            }}
+            className="px-4 py-2 text-sm bg-white border border-[var(--color-border-primary)] text-[var(--color-text-primary)] rounded-md hover:border-[var(--color-brand-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-primary)] transition-colors cursor-pointer"
+            defaultValue=""
+          >
+            <option value="" disabled>Load Example Template</option>
+            <optgroup label="Email Templates">
+              {EXAMPLE_TEMPLATES.filter(t => t.type === 'email').map(template => (
+                <option key={template.file} value={template.file}>
+                  {template.name}
+                </option>
+              ))}
+            </optgroup>
+            <optgroup label="SMS Templates">
+              {EXAMPLE_TEMPLATES.filter(t => t.type === 'sms').map(template => (
+                <option key={template.file} value={template.file}>
+                  {template.name}
+                </option>
+              ))}
+            </optgroup>
+            <optgroup label="Push Templates">
+              {EXAMPLE_TEMPLATES.filter(t => t.type === 'push').map(template => (
+                <option key={template.file} value={template.file}>
+                  {template.name}
+                </option>
+              ))}
+            </optgroup>
+          </select>
         </div>
       </header>
 
