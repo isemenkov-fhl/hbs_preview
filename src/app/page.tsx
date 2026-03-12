@@ -223,17 +223,20 @@ export default function Home() {
   }, [isDragging]);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col">
+    <div className="min-h-screen bg-[var(--color-background-secondary)] flex flex-col">
       {/* Header */}
-      <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-6 py-4 shadow-sm">
+      <header className="bg-[var(--color-background-primary)] border-b border-[var(--color-border-primary)] px-6 py-4 shadow-sm">
         <div className="max-w-[1800px] mx-auto flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-              Handlebars Template Preview
-            </h1>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              Preview email, SMS, push notifications, and Viber messages in real-time
-            </p>
+          <div className="flex items-center gap-3">
+            <img src="/salmon-favicon.ico" alt="Salmon Logo" className="w-8 h-8" />
+            <div>
+              <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
+                Handlebars Template Preview
+              </h1>
+              <p className="text-sm text-[var(--color-text-secondary)] mt-1">
+                Preview email, SMS, push notifications, and Viber messages in real-time
+              </p>
+            </div>
           </div>
 
           {/* Example Templates Dropdown */}
@@ -245,7 +248,7 @@ export default function Home() {
                   handleLoadExample(example.file, example.type);
                 }
               }}
-              className="px-4 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 rounded-md hover:border-blue-500 dark:hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors cursor-pointer"
+              className="px-4 py-2 text-sm bg-white border border-[var(--color-border-primary)] text-[var(--color-text-primary)] rounded-md hover:border-[var(--color-brand-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-primary)] transition-colors cursor-pointer"
               defaultValue=""
             >
               <option value="" disabled>Load Example Template</option>
@@ -273,31 +276,31 @@ export default function Home() {
             </select>
 
             {/* Quick Access Buttons */}
-            <div className="flex gap-2 border-l border-gray-300 dark:border-gray-600 pl-3">
+            <div className="flex gap-2 border-l border-[var(--color-border-primary)] pl-3">
               <button
                 onClick={() => handleLoadSample('email')}
-                className="px-3 py-1.5 text-sm bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-md transition-colors"
+                className="px-3 py-1.5 text-sm bg-[var(--brand-coral-50)] hover:bg-[var(--brand-coral-100)] text-[var(--brand-coral-700)] rounded-md transition-colors"
                 title="Load simple email sample"
               >
                 Email
               </button>
               <button
                 onClick={() => handleLoadSample('sms')}
-                className="px-3 py-1.5 text-sm bg-green-50 hover:bg-green-100 dark:bg-green-900/20 dark:hover:bg-green-900/30 text-green-700 dark:text-green-300 rounded-md transition-colors"
+                className="px-3 py-1.5 text-sm bg-[var(--brand-turquoise-50)] hover:bg-[var(--brand-turquoise-100)] text-[var(--brand-turquoise-700)] rounded-md transition-colors"
                 title="Load simple SMS sample"
               >
                 SMS
               </button>
               <button
                 onClick={() => handleLoadSample('push')}
-                className="px-3 py-1.5 text-sm bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/20 dark:hover:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-md transition-colors"
+                className="px-3 py-1.5 text-sm bg-[var(--message-green-50)] hover:bg-[var(--message-green-100)] text-[var(--message-green-700)] rounded-md transition-colors"
                 title="Load simple push sample"
               >
                 Push
               </button>
               <button
                 onClick={() => handleLoadSample('viber')}
-                className="px-3 py-1.5 text-sm bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-900/20 dark:hover:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-md transition-colors"
+                className="px-3 py-1.5 text-sm bg-[var(--message-blue-100)] hover:bg-[var(--message-blue-200)] text-[var(--message-blue-700)] rounded-md transition-colors"
                 title="Load simple Viber sample"
               >
                 Viber
@@ -314,13 +317,13 @@ export default function Home() {
           className="w-full flex flex-col gap-4 pr-2"
           style={{ width: `${editorWidth}%` }}
         >
-          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
+          <div className="bg-white rounded-2xl shadow-lg border border-[var(--color-border-primary)] overflow-hidden flex flex-col h-[calc(100vh-180px)]">
             {/* Editor Header */}
-            <div className="bg-gray-50 dark:bg-gray-800 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+            <div className="bg-[var(--color-background-tertiary)] px-6 py-4 border-b border-[var(--color-border-primary)]">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-sm font-bold text-gray-900 dark:text-gray-100">Template Editor</h2>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                  <h2 className="text-sm font-bold text-[var(--color-text-primary)]">Template Editor</h2>
+                  <p className="text-xs text-[var(--color-text-secondary)] mt-1">
                     Paste your Handlebars template below
                   </p>
                 </div>
@@ -333,7 +336,7 @@ export default function Home() {
                       onChange={handleFileUpload}
                       className="hidden"
                     />
-                    <div className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg transition-colors">
+                    <div className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium bg-[var(--brand-coral-50)] hover:bg-[var(--brand-coral-100)] text-[var(--brand-coral-700)] rounded-lg transition-colors">
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                       </svg>
@@ -343,7 +346,7 @@ export default function Home() {
                   {/* Clear Button */}
                   <button
                     onClick={handleClearEditor}
-                    className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium bg-[var(--message-red-50)] hover:bg-[var(--message-red-100)] text-[var(--message-red-700)] rounded-lg transition-colors"
                     title="Clear editor"
                   >
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -357,8 +360,8 @@ export default function Home() {
 
             {/* Push Title Field (conditional) */}
             {templateType === 'push' && (
-              <div className="bg-gray-50 dark:bg-gray-800 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-                <label className="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">
+              <div className="bg-[var(--color-background-tertiary)] px-6 py-4 border-b border-[var(--color-border-primary)]">
+                <label className="block text-xs font-bold text-[var(--color-text-primary)] mb-2">
                   Push Notification Title
                 </label>
                 <input
@@ -366,7 +369,7 @@ export default function Home() {
                   value={pushTitle}
                   onChange={(e) => setPushTitle(e.target.value)}
                   placeholder="Enter notification title..."
-                  className="w-full px-3 py-2 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                  className="w-full px-3 py-2 bg-white border border-[var(--color-border-primary)] rounded-lg text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-tertiary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-primary)] focus:border-transparent transition-colors"
                 />
               </div>
             )}
@@ -376,17 +379,17 @@ export default function Home() {
               value={templateContent}
               onChange={(e) => setTemplateContent(e.target.value)}
               placeholder="Paste your Handlebars template here..."
-              className="flex-1 w-full px-4 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-mono text-sm resize-none focus:outline-none placeholder-gray-400 dark:placeholder-gray-500"
+              className="flex-1 w-full px-4 py-3 bg-white text-[var(--color-text-primary)] font-mono text-sm resize-none focus:outline-none placeholder-[var(--color-text-tertiary)]"
               spellCheck={false}
             />
 
             {/* Footer Info */}
-            <div className="bg-gray-50 dark:bg-gray-800 px-4 py-2 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between text-xs">
-              <span className="text-gray-500 dark:text-gray-400">
+            <div className="bg-[var(--color-background-tertiary)] px-4 py-2 border-t border-[var(--color-border-primary)] flex items-center justify-between text-xs">
+              <span className="text-[var(--color-text-secondary)]">
                 {templateContent.length} characters
               </span>
-              <span className="text-gray-500 dark:text-gray-400">
-                Detected: <span className="font-semibold text-gray-700 dark:text-gray-300 uppercase">{templateType}</span>
+              <span className="text-[var(--color-text-secondary)]">
+                Detected: <span className="font-semibold text-[var(--color-text-primary)] uppercase">{templateType}</span>
               </span>
             </div>
           </div>
@@ -394,11 +397,11 @@ export default function Home() {
 
         {/* Draggable Divider */}
         <div
-          className="hidden xl:flex items-center justify-center cursor-col-resize group hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          className="hidden xl:flex items-center justify-center cursor-col-resize group hover:bg-[var(--color-background-tertiary)] transition-colors"
           style={{ width: '12px' }}
           onMouseDown={handleMouseDown}
         >
-          <div className="w-1 h-16 bg-gray-300 dark:bg-gray-600 rounded-full group-hover:bg-blue-500 transition-colors" />
+          <div className="w-1 h-16 bg-[var(--color-border-secondary)] rounded-full group-hover:bg-[var(--color-brand-primary)] transition-colors" />
         </div>
 
         {/* Variables Panel - Separate Column */}
@@ -407,8 +410,8 @@ export default function Home() {
             className="w-full flex flex-col gap-4 px-2"
             style={{ width: '25%' }}
           >
-            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
-              <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+            <div className="bg-white rounded-2xl shadow-lg border border-[var(--color-border-primary)] overflow-hidden flex flex-col h-[calc(100vh-180px)]">
+              <div className="bg-[var(--color-brand-primary)] px-6 py-4 border-b border-[var(--color-border-primary)]">
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="text-sm font-bold text-white">
@@ -432,18 +435,18 @@ export default function Home() {
                   {variables.map((variable) => (
                     <div
                       key={variable}
-                      className="p-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-lg border border-blue-100 dark:border-gray-700 hover:border-blue-400 transition-colors"
+                      className="p-4 bg-[var(--brand-coral-50)] rounded-lg border border-[var(--brand-coral-100)] hover:border-[var(--color-brand-primary)] transition-colors"
                     >
                       <div className="flex items-center justify-between gap-2 mb-3">
                         <div className="flex items-center gap-2 flex-1 min-w-0">
-                          <div className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></div>
-                          <code className="text-sm font-mono font-semibold text-gray-900 dark:text-blue-400 truncate">
+                          <div className="w-2 h-2 rounded-full bg-[var(--color-brand-primary)] flex-shrink-0"></div>
+                          <code className="text-sm font-mono font-semibold text-[var(--color-text-primary)] truncate">
                             {variable}
                           </code>
                         </div>
                         <button
                           onClick={() => handleResetVariable(variable)}
-                          className="text-xs text-gray-400 hover:text-blue-500 transition-colors flex-shrink-0"
+                          className="text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-brand-primary)] transition-colors flex-shrink-0"
                           title="Reset to default"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -451,13 +454,13 @@ export default function Home() {
                           </svg>
                         </button>
                       </div>
-                      <div className="pl-4 border-l-2 border-gray-200 dark:border-blue-800">
-                        <label className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2 block">Value:</label>
+                      <div className="pl-4 border-l-2 border-[var(--color-border-primary)]">
+                        <label className="text-xs font-medium text-[var(--color-text-secondary)] mb-2 block">Value:</label>
                         <input
                           type="text"
                           value={String(dummyData[variable])}
                           onChange={(e) => handleVariableChange(variable, e.target.value)}
-                          className="w-full px-3 py-2 text-sm text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                          className="w-full px-3 py-2 text-sm text-[var(--color-text-primary)] bg-white border border-[var(--color-border-primary)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-primary)] focus:border-transparent transition-colors"
                           placeholder="Enter value..."
                         />
                       </div>
@@ -478,14 +481,14 @@ export default function Home() {
               : `calc(${100 - editorWidth}% - 12px)`
           }}
         >
-          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
+          <div className="bg-white rounded-2xl shadow-lg border border-[var(--color-border-primary)] overflow-hidden flex flex-col h-[calc(100vh-180px)]">
             {/* Preview Header with Tabs */}
-            <div className="bg-gray-50 dark:bg-gray-800 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+            <div className="bg-[var(--color-background-tertiary)] px-6 py-4 border-b border-[var(--color-border-primary)]">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-sm font-bold text-gray-900 dark:text-gray-100">Preview</h2>
+                <h2 className="text-sm font-bold text-[var(--color-text-primary)]">Preview</h2>
                 <button
                   onClick={handleReloadPreview}
-                  className="flex items-center gap-1.5 px-4 py-2 text-xs font-medium bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
+                  className="flex items-center gap-1.5 px-4 py-2 text-xs font-medium bg-[var(--color-border-primary)] hover:bg-[var(--color-border-secondary)] text-[var(--color-text-primary)] rounded-lg transition-colors"
                   title="Reload preview"
                 >
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -496,13 +499,13 @@ export default function Home() {
               </div>
 
               {/* Type Switcher Tabs */}
-              <div className="flex gap-2 bg-gray-100 dark:bg-gray-700 p-1 rounded-lg">
+              <div className="flex gap-2 bg-[var(--color-border-primary)] p-1 rounded-lg">
                 <button
                   onClick={() => setTemplateType('email')}
                   className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-colors ${
                     templateType === 'email'
-                      ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                      ? 'bg-[var(--color-brand-primary)] text-white shadow-sm'
+                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
                   }`}
                 >
                   Email
@@ -511,8 +514,8 @@ export default function Home() {
                   onClick={() => setTemplateType('sms')}
                   className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-colors ${
                     templateType === 'sms'
-                      ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                      ? 'bg-[var(--color-brand-primary)] text-white shadow-sm'
+                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
                   }`}
                 >
                   SMS
@@ -524,8 +527,8 @@ export default function Home() {
                   }}
                   className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-colors ${
                     templateType === 'push'
-                      ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                      ? 'bg-[var(--color-brand-primary)] text-white shadow-sm'
+                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
                   }`}
                 >
                   Push
@@ -534,8 +537,8 @@ export default function Home() {
                   onClick={() => setTemplateType('viber')}
                   className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-colors ${
                     templateType === 'viber'
-                      ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                      ? 'bg-[var(--color-brand-primary)] text-white shadow-sm'
+                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
                   }`}
                 >
                   Viber
@@ -544,14 +547,14 @@ export default function Home() {
             </div>
 
             {/* Preview Content */}
-            <div className="flex-1 overflow-auto bg-gray-100 dark:bg-gray-800 p-6" key={reloadKey}>
+            <div className="flex-1 overflow-auto bg-[var(--color-background-secondary)] p-6" key={reloadKey}>
               {!renderedContent ? (
                 <div className="h-full flex items-center justify-center">
                   <div className="text-center">
-                    <svg className="w-16 h-16 mx-auto text-gray-300 dark:text-gray-700 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-16 h-16 mx-auto text-[var(--color-border-secondary)] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                    <p className="text-gray-500 dark:text-gray-400 text-sm">
+                    <p className="text-[var(--color-text-secondary)] text-sm">
                       Paste a template to see the preview
                     </p>
                   </div>

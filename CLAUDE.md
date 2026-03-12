@@ -125,6 +125,104 @@ Configuration is in `vercel.json`:
 ### Manual
 Build artifacts are in `.next/` and can be deployed to any Node.js hosting platform.
 
+## Design System
+
+### Salmon Color Palette
+
+The application uses the Salmon design system color palette for consistent branding and visual hierarchy. All colors are defined as CSS variables in `src/app/globals.css` for easy maintenance and theming.
+
+**Core Neutral Colors:**
+- `#FFFFFF` - White (neutral.white._100) - Primary backgrounds
+- `#F4F4F3` - Off-white (neutral.black._25) - Page background
+- `#EBEBEB` - Light gray (neutral.black._50) - Secondary backgrounds
+- `#E3E3E3` - Border gray (neutral.black._100) - Primary borders
+- `#BDBCBC` - Medium gray (neutral.black._200) - Dark borders
+- `#918F8F` - Text gray (neutral.black._300) - Placeholders
+- `#656263` - Dark gray (neutral.black._400) - Secondary text
+- `#231F20` - Almost black (neutral.black._600) - Primary text
+
+**Brand Colors (Coral):**
+- `#F05A5A` - Coral primary (brand.coral._400) - Main brand color, buttons, accents
+- `#FFECEF` - Coral lightest (brand.coral._50) - Light backgrounds
+- `#FECFD5` - Coral light (brand.coral._100) - Borders, hover states
+- `#D4393A` - Coral dark (brand.coral._700) - Text on light backgrounds
+- `#E74241` - Coral darker (brand.coral._600) - Dark accents
+
+**Supporting Colors (Turquoise):**
+- `#DCF1F2` - Turquoise light (brand.turquoise._50)
+- `#A8DDDD` - Turquoise medium (brand.turquoise._100)
+- `#18B2AE` - Turquoise primary (brand.turquoise._300)
+- `#00736B` - Turquoise dark (brand.turquoise._700)
+
+**Message Colors:**
+- Green: `#E4F5EC` (bg), `#BEE7CF` (hover), `#00B064` (primary), `#008F4D` (dark)
+- Blue: `#E4F4FE` (bg), `#C6DFFC` (hover), `#4295F6` (primary), `#3488EA` (dark)
+- Red: `#FEF2EE` (bg), `#FFCCD1` (hover), `#FF3129` (primary), `#E41324` (dark)
+
+**CSS Variables (defined in globals.css):**
+
+Neutral Colors:
+- `--neutral-white`, `--neutral-black-25` through `--neutral-black-600`
+
+Brand Coral:
+- `--brand-coral-50` through `--brand-coral-700`
+
+Brand Turquoise:
+- `--brand-turquoise-50`, `--brand-turquoise-100`, `--brand-turquoise-200`, `--brand-turquoise-300`, `--brand-turquoise-700`
+
+Message Colors:
+- `--message-green-50/100/500/700`
+- `--message-blue-100/200/600/700`
+- `--message-red-50/100/500/700`
+
+**Semantic Tokens (use these for consistency):**
+- `--color-background-primary` - Main backgrounds
+- `--color-background-secondary` - Secondary backgrounds
+- `--color-background-tertiary` - Tertiary backgrounds
+- `--color-text-primary` - Primary text
+- `--color-text-secondary` - Secondary text
+- `--color-text-tertiary` - Placeholders
+- `--color-border-primary` - Main borders
+- `--color-border-secondary` - Hover/active borders
+- `--color-brand-primary` - Main brand color (#E74241)
+- `--color-brand-hover` - Brand hover state
+- `--color-brand-light` - Brand light backgrounds
+- `--color-brand-border` - Brand borders
+
+**Usage Guidelines:**
+- Always use CSS variables (e.g., `var(--color-brand-primary)`) instead of hex codes
+- Primary actions use `--color-brand-primary`
+- All focus rings use `--color-brand-primary`
+- Borders use `--color-border-primary` and `--color-border-secondary`
+- Text hierarchy uses `--color-text-primary/secondary/tertiary`
+- Panel headers use `--color-brand-primary` background with white text
+- Variable cards use `--color-brand-light` with `--color-brand-border`
+
+**Example Usage:**
+```css
+/* Good - using semantic tokens */
+.button {
+  background: var(--color-brand-primary);
+  color: var(--neutral-white);
+  border: 1px solid var(--color-brand-border);
+}
+
+.button:hover {
+  background: var(--color-brand-hover);
+}
+
+/* Also good - using specific palette colors */
+.alert {
+  background: var(--message-red-50);
+  color: var(--message-red-700);
+}
+
+/* Bad - hardcoded colors */
+.button {
+  background: #E74241;  /* DON'T DO THIS */
+}
+```
+
 ## Key Implementation Details
 
 ### Template Rendering Flow

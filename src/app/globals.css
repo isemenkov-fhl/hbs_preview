@@ -1,8 +1,68 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Salmon Design System - Neutral Colors */
+  --neutral-white: #FFFFFF;
+  --neutral-black-25: #F4F4F3;
+  --neutral-black-50: #EBEBEB;
+  --neutral-black-100: #E3E3E3;
+  --neutral-black-200: #BDBCBC;
+  --neutral-black-300: #918F8F;
+  --neutral-black-400: #656263;
+  --neutral-black-600: #231F20;
+
+  /* Salmon Design System - Brand Coral */
+  --brand-coral-50: #FFECEF;
+  --brand-coral-100: #FECFD5;
+  --brand-coral-200: #EF9EA0;
+  --brand-coral-300: #E5787B;
+  --brand-coral-400: #F05A5A;
+  --brand-coral-500: #F54B42;
+  --brand-coral-600: #E74241;
+  --brand-coral-700: #D4393A;
+
+  /* Salmon Design System - Brand Turquoise */
+  --brand-turquoise-50: #DCF1F2;
+  --brand-turquoise-100: #A8DDDD;
+  --brand-turquoise-200: #6BC8C6;
+  --brand-turquoise-300: #18B2AE;
+  --brand-turquoise-700: #00736B;
+
+  /* Salmon Design System - Message Colors */
+  --message-green-50: #E4F5EC;
+  --message-green-100: #BEE7CF;
+  --message-green-500: #00B064;
+  --message-green-700: #008F4D;
+
+  --message-blue-100: #E4F4FE;
+  --message-blue-200: #C6DFFC;
+  --message-blue-600: #4295F6;
+  --message-blue-700: #3488EA;
+
+  --message-red-50: #FEF2EE;
+  --message-red-100: #FFCCD1;
+  --message-red-500: #FF3129;
+  --message-red-700: #E41324;
+
+  /* Semantic Tokens */
+  --color-background-primary: var(--neutral-white);
+  --color-background-secondary: var(--neutral-black-25);
+  --color-background-tertiary: var(--neutral-black-50);
+
+  --color-text-primary: var(--neutral-black-600);
+  --color-text-secondary: var(--neutral-black-400);
+  --color-text-tertiary: var(--neutral-black-300);
+
+  --color-border-primary: var(--neutral-black-100);
+  --color-border-secondary: var(--neutral-black-200);
+
+  --color-brand-primary: var(--brand-coral-600);
+  --color-brand-hover: var(--brand-coral-700);
+  --color-brand-light: var(--brand-coral-50);
+  --color-brand-border: var(--brand-coral-100);
+
+  --background: var(--color-background-primary);
+  --foreground: var(--color-text-primary);
 }
 
 @theme inline {
@@ -10,6 +70,19 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Extend Tailwind's color palette with Salmon colors */
+  --color-salmon-bg-primary: var(--neutral-white);
+  --color-salmon-bg-secondary: var(--neutral-black-25);
+  --color-salmon-bg-tertiary: var(--neutral-black-50);
+  --color-salmon-text-primary: var(--neutral-black-600);
+  --color-salmon-text-secondary: var(--neutral-black-400);
+  --color-salmon-text-tertiary: var(--neutral-black-300);
+  --color-salmon-border-primary: var(--neutral-black-100);
+  --color-salmon-border-secondary: var(--neutral-black-200);
+  --color-salmon-brand: var(--brand-coral-600);
+  --color-salmon-brand-hover: var(--brand-coral-700);
+  --color-salmon-brand-light: var(--brand-coral-50);
 }
 
 @media (prefers-color-scheme: dark) {

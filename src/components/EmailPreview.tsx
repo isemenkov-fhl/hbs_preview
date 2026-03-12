@@ -43,22 +43,22 @@ export function EmailPreview({ content }: EmailPreviewProps) {
   }, [content]);
 
   return (
-    <div className="w-full flex flex-col bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+    <div className="w-full flex flex-col bg-white rounded-lg shadow-lg overflow-hidden">
       {/* Email Client Header (Gmail-style) */}
-      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3">
+      <div className="bg-white border-b border-[var(--color-border-primary)] px-4 py-3">
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
+          <div className="w-10 h-10 bg-gradient-to-br from-[var(--brand-coral-600)] to-[var(--brand-coral-400)] rounded-full flex items-center justify-center text-white font-semibold">
             S
           </div>
           <div className="flex-1">
-            <div className="font-semibold text-sm text-gray-900 dark:text-gray-100">Sender Name</div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">sender@example.com</div>
+            <div className="font-semibold text-sm text-[var(--color-text-primary)]">Salmon</div>
+            <div className="text-xs text-[var(--color-text-secondary)]">no-reply@salmon.ph</div>
           </div>
-          <div className="text-xs text-gray-500 dark:text-gray-400">
+          <div className="text-xs text-[var(--color-text-secondary)]">
             {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
           </div>
         </div>
-        <div className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+        <div className="text-sm text-[var(--color-text-secondary)] flex items-center gap-1">
           <span>to me</span>
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -67,7 +67,7 @@ export function EmailPreview({ content }: EmailPreviewProps) {
       </div>
 
       {/* Email Content */}
-      <div className="bg-gray-50 dark:bg-gray-900">
+      <div className="bg-[var(--color-background-secondary)]">
         <iframe
           ref={iframeRef}
           className="w-full border-0"
