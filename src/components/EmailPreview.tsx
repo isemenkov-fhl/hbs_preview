@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface EmailPreviewProps {
   content: string;
@@ -8,6 +8,7 @@ interface EmailPreviewProps {
 
 export function EmailPreview({ content }: EmailPreviewProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [iframeHeight, setIframeHeight] = useState(600);
 
   useEffect(() => {
     if (iframeRef.current) {
@@ -16,12 +17,33 @@ export function EmailPreview({ content }: EmailPreviewProps) {
         iframeDoc.open();
         iframeDoc.write(content);
         iframeDoc.close();
+
+        // Resize iframe to fit content
+        const resizeIframe = () => {
+          if (iframeDoc.body) {
+            const height = Math.max(
+              iframeDoc.body.scrollHeight,
+              iframeDoc.documentElement?.scrollHeight || 0,
+              600 // minimum height
+            );
+            setIframeHeight(height);
+          }
+        };
+
+        // Wait for content to load and resize
+        setTimeout(resizeIframe, 100);
+
+        // Also resize on iframe load events
+        if (iframeRef.current.contentWindow) {
+          iframeRef.current.contentWindow.addEventListener('load', resizeIframe);
+          iframeRef.current.contentWindow.addEventListener('resize', resizeIframe);
+        }
       }
     }
   }, [content]);
 
   return (
-    <div className="w-full h-full flex flex-col bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+    <div className="w-full flex flex-col bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
       {/* Email Client Header (Gmail-style) */}
       <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3">
         <div className="flex items-center gap-3 mb-3">
@@ -45,10 +67,11 @@ export function EmailPreview({ content }: EmailPreviewProps) {
       </div>
 
       {/* Email Content */}
-      <div className="flex-1 overflow-auto bg-gray-50 dark:bg-gray-900">
+      <div className="bg-gray-50 dark:bg-gray-900">
         <iframe
           ref={iframeRef}
-          className="w-full h-full border-0"
+          className="w-full border-0"
+          style={{ height: `${iframeHeight}px` }}
           title="Email Preview"
           sandbox="allow-same-origin"
         />

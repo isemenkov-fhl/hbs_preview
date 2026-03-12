@@ -209,24 +209,8 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Example Templates Dropdown & Theme Toggle */}
+          {/* Example Templates Dropdown */}
           <div className="flex gap-3 items-center">
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
-              title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-            >
-              {isDarkMode ? (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              )}
-            </button>
             <select
               onChange={(e) => {
                 const example = EXAMPLE_TEMPLATES.find(t => t.file === e.target.value);
@@ -303,19 +287,19 @@ export default function Home() {
           className="w-full flex flex-col gap-4 pr-2"
           style={{ width: `${editorWidth}%` }}
         >
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
             {/* Editor Header */}
-            <div className="bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-              <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100">Template Editor</h2>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <div className="bg-gray-50 dark:bg-gray-800 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+              <h2 className="text-sm font-bold text-gray-900 dark:text-gray-100">Template Editor</h2>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                 Paste your Handlebars template below
               </p>
             </div>
 
             {/* Push Title Field (conditional) */}
             {templateType === 'push' && (
-              <div className="bg-amber-50 dark:bg-amber-900/20 px-4 py-3 border-b border-amber-200 dark:border-amber-800">
-                <label className="block text-xs font-semibold text-amber-900 dark:text-amber-300 mb-2">
+              <div className="bg-gray-50 dark:bg-gray-800 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                <label className="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">
                   Push Notification Title
                 </label>
                 <input
@@ -323,7 +307,7 @@ export default function Home() {
                   value={pushTitle}
                   onChange={(e) => setPushTitle(e.target.value)}
                   placeholder="Enter notification title..."
-                  className="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-amber-300 dark:border-amber-700 rounded-md text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="w-full px-3 py-2 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                 />
               </div>
             )}
@@ -351,11 +335,11 @@ export default function Home() {
 
         {/* Draggable Divider */}
         <div
-          className="hidden xl:flex items-center justify-center cursor-col-resize group hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
+          className="hidden xl:flex items-center justify-center cursor-col-resize group hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           style={{ width: '12px' }}
           onMouseDown={handleMouseDown}
         >
-          <div className="w-1 h-16 bg-gray-300 dark:bg-gray-600 rounded-full group-hover:bg-blue-500 dark:group-hover:bg-blue-400 transition-colors" />
+          <div className="w-1 h-16 bg-gray-300 dark:bg-gray-600 rounded-full group-hover:bg-blue-500 transition-colors" />
         </div>
 
         {/* Variables Panel - Separate Column */}
@@ -364,20 +348,20 @@ export default function Home() {
             className="w-full flex flex-col gap-4 px-2"
             style={{ width: '25%' }}
           >
-            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
-              <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
+              <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-sm font-semibold text-white">
+                    <h3 className="text-sm font-bold text-white">
                       Template Variables
                     </h3>
-                    <p className="text-xs text-blue-50 mt-1">
+                    <p className="text-xs text-white/90 mt-1">
                       {variables.length} {variables.length === 1 ? 'parameter' : 'parameters'} detected
                     </p>
                   </div>
                   <button
                     onClick={handleResetAllVariables}
-                    className="px-3 py-1.5 text-xs font-medium bg-white/20 hover:bg-white/30 text-white rounded-md transition-colors"
+                    className="px-4 py-2 text-xs font-medium bg-white/20 hover:bg-white/30 text-white rounded-lg transition-colors"
                     title="Reset all to defaults"
                   >
                     Reset All
@@ -389,18 +373,18 @@ export default function Home() {
                   {variables.map((variable) => (
                     <div
                       key={variable}
-                      className="p-3 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow"
+                      className="p-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-lg border border-blue-100 dark:border-gray-700 hover:border-blue-400 transition-colors"
                     >
-                      <div className="flex items-center justify-between gap-2 mb-2">
+                      <div className="flex items-center justify-between gap-2 mb-3">
                         <div className="flex items-center gap-2 flex-1 min-w-0">
                           <div className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></div>
-                          <code className="text-sm font-mono font-semibold text-blue-600 dark:text-blue-400 truncate">
-                            {`{{${variable}}}`}
+                          <code className="text-sm font-mono font-semibold text-gray-900 dark:text-blue-400 truncate">
+                            {variable}
                           </code>
                         </div>
                         <button
                           onClick={() => handleResetVariable(variable)}
-                          className="text-xs text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors flex-shrink-0"
+                          className="text-xs text-gray-400 hover:text-blue-500 transition-colors flex-shrink-0"
                           title="Reset to default"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -408,13 +392,13 @@ export default function Home() {
                           </svg>
                         </button>
                       </div>
-                      <div className="pl-4 border-l-2 border-blue-200 dark:border-blue-800">
-                        <label className="text-xs text-gray-500 dark:text-gray-400 mb-1 block">Value:</label>
+                      <div className="pl-4 border-l-2 border-gray-200 dark:border-blue-800">
+                        <label className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2 block">Value:</label>
                         <input
                           type="text"
                           value={String(dummyData[variable])}
                           onChange={(e) => handleVariableChange(variable, e.target.value)}
-                          className="w-full px-2 py-1.5 text-sm text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-3 py-2 text-sm text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                           placeholder="Enter value..."
                         />
                       </div>
@@ -435,14 +419,14 @@ export default function Home() {
               : `calc(${100 - editorWidth}% - 12px)`
           }}
         >
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
             {/* Preview Header with Tabs */}
-            <div className="bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+            <div className="bg-gray-50 dark:bg-gray-800 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100">Preview</h2>
+                <h2 className="text-sm font-bold text-gray-900 dark:text-gray-100">Preview</h2>
                 <button
                   onClick={handleReloadPreview}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-md transition-colors"
+                  className="flex items-center gap-1.5 px-4 py-2 text-xs font-medium bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
                   title="Reload preview"
                 >
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -453,12 +437,12 @@ export default function Home() {
               </div>
 
               {/* Type Switcher Tabs */}
-              <div className="flex gap-1 bg-gray-100 dark:bg-gray-700 p-1 rounded-lg">
+              <div className="flex gap-2 bg-gray-100 dark:bg-gray-700 p-1 rounded-lg">
                 <button
                   onClick={() => setTemplateType('email')}
-                  className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-all ${
+                  className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-colors ${
                     templateType === 'email'
-                      ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-gray-100 shadow-sm'
+                      ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm'
                       : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                   }`}
                 >
@@ -466,9 +450,9 @@ export default function Home() {
                 </button>
                 <button
                   onClick={() => setTemplateType('sms')}
-                  className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-all ${
+                  className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-colors ${
                     templateType === 'sms'
-                      ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-gray-100 shadow-sm'
+                      ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm'
                       : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                   }`}
                 >
@@ -479,9 +463,9 @@ export default function Home() {
                     setTemplateType('push');
                     if (!pushTitle) setPushTitle('New Notification');
                   }}
-                  className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-all ${
+                  className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-colors ${
                     templateType === 'push'
-                      ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-gray-100 shadow-sm'
+                      ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm'
                       : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                   }`}
                 >
@@ -489,9 +473,9 @@ export default function Home() {
                 </button>
                 <button
                   onClick={() => setTemplateType('viber')}
-                  className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-all ${
+                  className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-colors ${
                     templateType === 'viber'
-                      ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-gray-100 shadow-sm'
+                      ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm'
                       : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                   }`}
                 >

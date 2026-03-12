@@ -23,9 +23,9 @@ export function ViberPreview({ content }: ViberPreviewProps) {
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-36 h-6 bg-black rounded-b-3xl z-10"></div>
 
             {/* Screen */}
-            <div className="bg-white rounded-[2.5rem] overflow-hidden" style={{ height: '600px' }}>
+            <div className="bg-white rounded-[2.5rem] overflow-hidden flex flex-col" style={{ height: '600px' }}>
               {/* Status Bar */}
-              <div className="bg-[#7360F2] px-6 py-3 flex justify-between items-center text-xs font-semibold text-white">
+              <div className="bg-[#7360F2] px-6 py-3 flex justify-between items-center text-xs font-semibold text-white flex-shrink-0">
                 <span>{currentTime}</span>
                 <div className="flex items-center gap-1">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -38,7 +38,7 @@ export function ViberPreview({ content }: ViberPreviewProps) {
               </div>
 
               {/* Viber Header */}
-              <div className="bg-[#7360F2] px-4 py-3 text-white">
+              <div className="bg-[#7360F2] px-4 py-3 text-white flex-shrink-0">
                 <div className="flex items-center gap-3">
                   <button className="text-white">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,7 +58,7 @@ export function ViberPreview({ content }: ViberPreviewProps) {
               </div>
 
               {/* Message Content */}
-              <div className="p-4 bg-white flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 240px)' }}>
+              <div className="p-4 bg-white flex-1 overflow-y-auto">
                 <div className="flex flex-col items-start mb-2">
                   <div className="text-[11px] text-gray-500 mb-1.5 text-center w-full">{currentTime}</div>
                   <div className="bg-[#F2F2F7] rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%] shadow-sm border border-gray-200">
@@ -74,7 +74,7 @@ export function ViberPreview({ content }: ViberPreviewProps) {
               </div>
 
               {/* Viber Input Bar */}
-              <div className="bg-white border-t border-gray-200 px-4 py-2">
+              <div className="bg-white border-t border-gray-200 px-4 py-2 flex-shrink-0">
                 <div className="flex items-center gap-2">
                   <button className="text-gray-400">
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -93,7 +93,7 @@ export function ViberPreview({ content }: ViberPreviewProps) {
               </div>
 
               {/* iOS Keyboard */}
-              <div className="bg-[#D1D5DB] px-2 py-1.5">
+              <div className="bg-[#D1D5DB] px-2 py-1.5 flex-shrink-0">
                 <div className="bg-white rounded-lg p-2 mb-1">
                   <div className="grid grid-cols-10 gap-1 text-[10px]">
                     <div className="col-span-10 flex gap-1 mb-1">
@@ -133,9 +133,9 @@ export function ViberPreview({ content }: ViberPreviewProps) {
           {/* Android Frame */}
           <div className="bg-gray-900 rounded-[2.5rem] p-2.5 shadow-2xl">
             {/* Screen */}
-            <div className="bg-white rounded-[2rem] overflow-hidden" style={{ height: '600px' }}>
+            <div className="bg-white rounded-[2rem] overflow-hidden flex flex-col" style={{ height: '600px' }}>
               {/* Status Bar */}
-              <div className="bg-[#7360F2] px-4 py-2 flex justify-between items-center text-xs text-white">
+              <div className="bg-[#7360F2] px-4 py-2 flex justify-between items-center text-xs text-white flex-shrink-0">
                 <span className="font-medium">{currentTime}</span>
                 <div className="flex items-center gap-1">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -148,7 +148,7 @@ export function ViberPreview({ content }: ViberPreviewProps) {
               </div>
 
               {/* Viber Header */}
-              <div className="bg-[#7360F2] px-4 py-3 text-white">
+              <div className="bg-[#7360F2] px-4 py-3 text-white flex-shrink-0">
                 <div className="flex items-center gap-3">
                   <button className="text-white">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -168,7 +168,7 @@ export function ViberPreview({ content }: ViberPreviewProps) {
               </div>
 
               {/* Message Content */}
-              <div className="p-4 bg-[#F7F7F7] flex-1 overflow-y-auto" style={{ maxHeight: 'calc(600px - 240px)' }}>
+              <div className="p-4 bg-[#F7F7F7] flex-1 overflow-y-auto">
                 <div className="flex flex-col items-start mb-2">
                   <div className="text-[11px] text-gray-500 mb-1.5 text-center w-full">{currentTime}</div>
                   <div className="bg-white rounded-lg rounded-tl-sm px-3.5 py-2.5 max-w-[80%] shadow-sm border border-gray-200">
@@ -184,7 +184,7 @@ export function ViberPreview({ content }: ViberPreviewProps) {
               </div>
 
               {/* Viber Input Bar */}
-              <div className="bg-white border-t border-gray-200 px-4 py-2">
+              <div className="bg-white border-t border-gray-200 px-4 py-2 flex-shrink-0">
                 <div className="flex items-center gap-2">
                   <button className="text-gray-400">
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -203,7 +203,7 @@ export function ViberPreview({ content }: ViberPreviewProps) {
               </div>
 
               {/* Android Keyboard */}
-              <div className="bg-[#E8EAED] px-1.5 py-1.5">
+              <div className="bg-[#E8EAED] px-1.5 py-1.5 flex-shrink-0">
                 <div className="grid grid-cols-10 gap-1 text-[10px] mb-1">
                   {['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map(key => (
                     <div key={key} className="bg-white shadow rounded py-2 text-center font-medium text-gray-900">{key}</div>

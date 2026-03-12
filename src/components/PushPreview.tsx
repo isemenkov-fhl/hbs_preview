@@ -36,65 +36,40 @@ export function PushPreview({ title, content }: PushPreviewProps) {
               {/* Push Notification */}
               <div className="absolute top-48 left-4 right-4">
                 <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden">
-                  {/* Notification Header */}
-                  <div className="px-3 py-2 flex items-center gap-2 border-b border-gray-100">
-                    <div className="w-5 h-5 bg-blue-500 rounded-md flex items-center justify-center flex-shrink-0">
-                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-baseline gap-1">
-                        <span className="font-semibold text-xs text-gray-900 truncate">{displayTitle}</span>
-                        <span className="text-[10px] text-gray-500 flex-shrink-0">now</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Notification Content */}
                   <div className="px-3 py-2.5">
-                    <p className="text-[15px] text-gray-900 leading-relaxed whitespace-pre-wrap break-words">
-                      {content}
-                    </p>
+                    {/* App Header */}
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <div className="w-4 h-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                        </svg>
+                      </div>
+                      <span className="text-[11px] font-medium text-gray-600 flex-1 truncate">App Name</span>
+                      <span className="text-[11px] text-gray-500 flex-shrink-0">now</span>
+                    </div>
+
+                    {/* Notification Title */}
+                    <div className="mb-0.5">
+                      <p className="text-[13px] font-semibold text-gray-900 leading-tight line-clamp-2">
+                        {displayTitle}
+                      </p>
+                    </div>
+
+                    {/* Notification Body */}
+                    <div>
+                      <p className="text-[13px] text-gray-900 leading-tight line-clamp-4">
+                        {content}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Bottom swipe area with keyboard */}
-              <div className="absolute bottom-0 left-0 right-0">
+              {/* Bottom swipe indicator */}
+              <div className="absolute bottom-4 left-0 right-0">
                 {/* Swipe Indicator */}
                 <div className="flex justify-center py-2">
                   <div className="w-32 h-1 bg-white/30 rounded-full"></div>
-                </div>
-
-                {/* iOS Keyboard */}
-                <div className="bg-[#D1D5DB]/90 backdrop-blur-lg px-2 py-1.5">
-                  <div className="bg-white/90 rounded-lg p-2 mb-1">
-                    <div className="grid grid-cols-10 gap-1 text-[10px]">
-                      <div className="col-span-10 flex gap-1 mb-1">
-                        {['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map(key => (
-                          <div key={key} className="flex-1 bg-white shadow-sm rounded py-1.5 text-center font-medium text-gray-900">{key}</div>
-                        ))}
-                      </div>
-                      <div className="col-span-10 flex gap-1 px-2">
-                        {['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'].map(key => (
-                          <div key={key} className="flex-1 bg-white shadow-sm rounded py-1.5 text-center font-medium text-gray-900">{key}</div>
-                        ))}
-                      </div>
-                      <div className="col-span-10 flex gap-1">
-                        <div className="w-8 bg-white shadow-sm rounded py-1.5 text-center">⇧</div>
-                        {['Z', 'X', 'C', 'V', 'B', 'N', 'M'].map(key => (
-                          <div key={key} className="flex-1 bg-white shadow-sm rounded py-1.5 text-center font-medium text-gray-900">{key}</div>
-                        ))}
-                        <div className="w-8 bg-white shadow-sm rounded py-1.5 text-center">⌫</div>
-                      </div>
-                      <div className="col-span-10 flex gap-1 mt-1">
-                        <div className="w-12 bg-white shadow-sm rounded py-1.5 text-center text-gray-600">123</div>
-                        <div className="flex-1 bg-white shadow-sm rounded py-1.5 text-center text-gray-400">space</div>
-                        <div className="w-12 bg-blue-500 text-white shadow-sm rounded py-1.5 text-center font-medium">↑</div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -132,55 +107,32 @@ export function PushPreview({ title, content }: PushPreviewProps) {
               {/* Push Notification */}
               <div className="absolute top-64 left-4 right-4">
                 <div className="bg-[#202124] rounded-lg shadow-2xl overflow-hidden">
-                  {/* Notification Header */}
-                  <div className="px-4 py-2 flex items-center gap-3">
-                    <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-baseline justify-between gap-2">
-                        <span className="font-medium text-sm text-white truncate">{displayTitle}</span>
-                        <span className="text-xs text-gray-400 flex-shrink-0">now</span>
+                  <div className="px-4 py-2.5">
+                    {/* App Header */}
+                    <div className="flex items-center gap-2.5 mb-1.5">
+                      <div className="w-5 h-5 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                        </svg>
                       </div>
+                      <span className="text-xs font-medium text-gray-300 flex-1 truncate">App Name</span>
+                      <span className="text-xs text-gray-400 flex-shrink-0">now</span>
+                    </div>
+
+                    {/* Notification Title */}
+                    <div className="mb-1">
+                      <p className="text-sm font-semibold text-white leading-tight line-clamp-2">
+                        {displayTitle}
+                      </p>
+                    </div>
+
+                    {/* Notification Body */}
+                    <div>
+                      <p className="text-sm text-gray-300 leading-tight line-clamp-4">
+                        {content}
+                      </p>
                     </div>
                   </div>
-
-                  {/* Notification Content */}
-                  <div className="px-4 pb-3">
-                    <p className="text-[15px] text-gray-300 leading-relaxed whitespace-pre-wrap break-words">
-                      {content}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Android Keyboard */}
-              <div className="absolute bottom-0 left-0 right-0 bg-[#E8EAED]/90 backdrop-blur-lg px-1.5 py-1.5">
-                <div className="grid grid-cols-10 gap-1 text-[10px] mb-1">
-                  {['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map(key => (
-                    <div key={key} className="bg-white shadow rounded py-2 text-center font-medium text-gray-900">{key}</div>
-                  ))}
-                </div>
-                <div className="grid grid-cols-9 gap-1 text-[10px] mb-1 px-2">
-                  {['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'].map(key => (
-                    <div key={key} className="bg-white shadow rounded py-2 text-center font-medium text-gray-900">{key}</div>
-                  ))}
-                </div>
-                <div className="flex gap-1 text-[10px] mb-1">
-                  <div className="bg-white shadow rounded py-2 px-3 text-center">⇧</div>
-                  {['Z', 'X', 'C', 'V', 'B', 'N', 'M'].map(key => (
-                    <div key={key} className="flex-1 bg-white shadow rounded py-2 text-center font-medium text-gray-900">{key}</div>
-                  ))}
-                  <div className="bg-white shadow rounded py-2 px-3 text-center">⌫</div>
-                </div>
-                <div className="flex gap-1 text-[10px]">
-                  <div className="bg-white shadow rounded py-2 px-3 text-center text-gray-600">?123</div>
-                  <div className="bg-white shadow rounded py-2 px-2 text-center">🙂</div>
-                  <div className="flex-1 bg-white shadow rounded py-2 text-center text-gray-400">space</div>
-                  <div className="bg-white shadow rounded py-2 px-3 text-center text-gray-600">.</div>
-                  <div className="bg-white shadow rounded py-2 px-3 text-center">↵</div>
                 </div>
               </div>
             </div>
