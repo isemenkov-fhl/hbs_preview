@@ -159,6 +159,33 @@ export default function Home() {
     setDummyData(generatedData);
   };
 
+  const handleClearEditor = () => {
+    setTemplateContent('');
+    setPushTitle('');
+  };
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const content = e.target?.result as string;
+        setTemplateContent(content);
+
+        // Auto-detect type from content
+        const detectedType = detectTemplateType(content);
+        setTemplateType(detectedType);
+
+        if (detectedType === 'push' && !pushTitle) {
+          setPushTitle('New Notification');
+        }
+      };
+      reader.readAsText(file);
+    }
+    // Reset the input so the same file can be selected again
+    event.target.value = '';
+  };
+
   // Resizable panel handlers
   const handleMouseDown = () => {
     setIsDragging(true);
@@ -290,10 +317,42 @@ export default function Home() {
           <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[calc(100vh-180px)]">
             {/* Editor Header */}
             <div className="bg-gray-50 dark:bg-gray-800 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-              <h2 className="text-sm font-bold text-gray-900 dark:text-gray-100">Template Editor</h2>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                Paste your Handlebars template below
-              </p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-sm font-bold text-gray-900 dark:text-gray-100">Template Editor</h2>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                    Paste your Handlebars template below
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  {/* File Upload Button */}
+                  <label className="cursor-pointer">
+                    <input
+                      type="file"
+                      accept=".hbs,.handlebars,.txt"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                    />
+                    <div className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg transition-colors">
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                      </svg>
+                      Upload File
+                    </div>
+                  </label>
+                  {/* Clear Button */}
+                  <button
+                    onClick={handleClearEditor}
+                    className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg transition-colors"
+                    title="Clear editor"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    Clear
+                  </button>
+                </div>
+              </div>
             </div>
 
             {/* Push Title Field (conditional) */}
