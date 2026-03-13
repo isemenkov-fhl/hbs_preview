@@ -111,7 +111,7 @@ export function SMSPreview({ content }: SMSPreviewProps) {
             {/* Screen */}
             <div className="bg-white rounded-[2rem] overflow-hidden flex flex-col" style={{ height: '600px' }}>
               {/* Status Bar */}
-              <div className="bg-white px-4 py-2 flex justify-between items-center text-xs flex-shrink-0">
+              <div className="bg-white px-4 py-2 flex justify-between items-center text-xs flex-shrink-0 text-gray-900">
                 <span className="font-medium">{currentTime}</span>
                 <div className="flex items-center gap-1">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
