@@ -377,9 +377,6 @@ export default function Home() {
               <span className="text-[var(--color-text-secondary)]">
                 {templateContent.length} characters
               </span>
-              <span className="text-[var(--color-text-secondary)]">
-                Detected: <span className="font-semibold text-[var(--color-text-primary)] uppercase">{templateType}</span>
-              </span>
             </div>
           </div>
 
