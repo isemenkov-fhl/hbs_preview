@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=400" />
+    <title>Resubmit your Onboarding Information Form</title>
+    <!-- OG Meta -->
+    <meta property="og:title" content="Resubmit your Onboarding Information Form" />
+    <style type="text/css">
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .main {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #222222;
+        }
+
+        .paragraph {
+            font-size: 20px;
+            color: #444444;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 20px 42px;
+            font-size: 19px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #f05a5a;
+            border-radius: 16px;
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        .doc-table {
+            width: 100%;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .doc-table th, .doc-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .doc-table th {
+            background-color: #f2f2f2;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div style="text-align: center; margin-bottom: 24px;">
+            <img src="https://static.tildacdn.one/tild3831-3635-4639-b537-373234396334/logo-sal.png" width="200" alt="Salmon Logo">
+        </div>
+
+        <div class="title" style="margin-top: 0;">Resubmit your Onboarding Information Form</div>
+
+        <div class="paragraph">
+            Hello {{candidate_name}}! This is {{recruiter_name}}, recruiter from Salmon.
+            <br><br>
+            Thank you for your submission. However, one or more documents you provided are not accepted or incorrect.
+        </div>
+
+        <table class="doc-table">
+            <thead>
+                <tr>
+                    <th>Valid ID</th>
+                    <th>Bank</th>
+                    <th>NBI</th>
+                    <th>HDMF/Pag-Ibig</th>
+                    <th>PhilHealth</th>
+                    <th>SSS</th>
+                    <th>TIN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{valid_id}}</td>
+                    <td>{{bank}}</td>
+                    <td>{{nbi}}</td>
+                    <td>{{pagibig}}</td>
+                    <td>{{philhealth}}</td>
+                    <td>{{sss}}</td>
+                    <td>{{tin}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+     <div style="text-align: center;">
+            <a class="btn" href="{{{oif_link}}}">Update Form</a>
+        </div>
+
+        
+        <div class="paragraph">
+            <span class="section-title">Valid ID</span><br>
+            The ID you provided is not among the accepted primary IDs. Please submit one of the following: SSS, UMID, PRC ID, Postal ID, PhilSys ID, Passport, or Driver's License.
+        
+            <span class="section-title">Bank</span><br>
+            Please submit: online bank profile, stub, or passbook showing logo, name, your name, and account number. Debit/credit cards without full name/number are not accepted.
+            <br><em>Good examples:</em><br>
+            <div style="display: flex; justify-content: space-between; gap: 10px;">
+                <img src="https://web.slmn.ph/email-service/upload-api/email_media/file/1/2025/09/08/batch/198dbb8a-5b52-4c56-912e-3a1dbd2b9e29/01-58-25.png" style="width: 25%;">
+                <img src="https://web.slmn.ph/email-service/upload-api/email_media/file/2/2025/09/08/batch/198dbb8a-5b52-4c56-912e-3a1dbd2b9e29/01-58-24.png" style="width: 25%;">
+                <img src="https://web.slmn.ph/email-service/upload-api/email_media/file/3/2025/09/08/batch/198dbb8a-5b52-4c56-912e-3a1dbd2b9e29/01-58-25.png" style="width: 25%;">
+                <img src="https://web.slmn.ph/email-service/upload-api/email_media/file/4/2025/09/08/batch/198dbb8a-5b52-4c56-912e-3a1dbd2b9e29/01-58-25.png" style="width: 25%;">
+            </div>
+            <br><em>Popular mistakes:</em> Cropped screenshots, unverified GCASH/MAYA.
+
+            <br><br><span class="section-title">NBI</span><br>
+            NBI Clearance must be valid at least 1 month from your start date. Paid appointment slip may be accepted. No expired or invalid clearances.
+            <br><em>Good examples:</em><br>
+            <div style="display: flex; justify-content: space-between; gap: 10px;">
+                <img src="https://web.slmn.ph/email-service/upload-api/email_media/file/5/2025/09/08/batch/198dbb8a-5b52-4c56-912e-3a1dbd2b9e29/01-58-25.png" style="width: 25%;">
+                <img src="https://web.slmn.ph/email-service/upload-api/email_media/file/6/2025/09/08/batch/198dbb8a-5b52-4c56-912e-3a1dbd2b9e29/01-58-24.png" style="width: 25%;">
+                <img src="https://web.slmn.ph/email-service/upload-api/email_media/file/7/2025/09/08/batch/198dbb8a-5b52-4c56-912e-3a1dbd2b9e29/01-58-25.png" style="width: 25%;">
+                <img src="https://web.slmn.ph/email-service/upload-api/email_media/file/8/2025/09/08/batch/198dbb8a-5b52-4c56-912e-3a1dbd2b9e29/01-58-25.png" style="width: 25%;">
+            </div>
+            <br><em>Popular mistakes:</em> Expired, unpaid slips, HIT without clearance.
+
+            <br><br><span class="section-title">HDMF/Pag-Ibig</span><br>
+            Submit: Loyalty Card, stamped MDF, or Pag-IBIG Online screenshot showing name & number.
+            <br><em>Popular mistakes:</em> RTN instead of ID number, cropped/blank/handwritten documents.
+
+            <br><br><span class="section-title">PhilHealth</span><br>
+            Submit: PhilHealth ID, MDR, or member screenshot from portal showing name & number.
+            <br><em>Popular mistakes:</em> Cropped images, handwritten numbers, partial info.
+
+            <br><br><span class="section-title">SSS</span><br>
+            Submit: SSS ID, verification slip, My.SSS screenshot, or stamped E1/E4 form.
+            <br><em>Popular mistakes:</em> UMID alone, cropped docs, handwritten numbers.
+
+            <br><br><span class="section-title">TIN</span><br>
+            Submit: Form 2316, TIN ID, 1902/1700, or ORUS screenshot. New hires: fill out Form 1902.
+            <br><em>Popular mistakes:</em> Blank names, cropped forms, handwritten numbers.
+        </div>
+        
+        <div class="paragraph">
+            <strong>If you have any questions or issues, please reach out to your recruiter:</strong><br>
+            📧 Email: <a href="mailto:{{{recruiter_email}}}">{{recruiter_email}}</a><br>
+            📞 Phone: {{recruiter_phone}}
+        </div>
+
+        <div class="paragraph">
+            Thank you for your cooperation.
+            <br><br>
+            Best regards, <br>
+            Salmon Recruitment Team
+        </div>
+    </div>
+</body>
+
+</html>
