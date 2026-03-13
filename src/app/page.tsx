@@ -5,8 +5,10 @@ import { EmailPreview } from '@/components/EmailPreview';
 import { SMSPreview } from '@/components/SMSPreview';
 import { ViberPreview } from '@/components/ViberPreview';
 import { PushPreview } from '@/components/PushPreview';
+import ValidationPanel from '@/components/ValidationPanel';
 import { detectTemplateType, extractHandlebarsVariables, generateDummyData, TemplateType } from '@/lib/templateUtils';
 import { renderTemplate } from '@/lib/handlebarsRenderer';
+import { validateTemplate, ValidationResult } from '@/lib/templateValidator';
 
 // List of available example templates
 const EXAMPLE_TEMPLATES = [
@@ -27,6 +29,8 @@ export default function Home() {
   const [variables, setVariables] = useState<string[]>([]);
   const [dummyData, setDummyData] = useState<Record<string, any>>({});
   const [reloadKey, setReloadKey] = useState(0);
+  const [validationResults, setValidationResults] = useState<ValidationResult[]>([]);
+  const [previousContent, setPreviousContent] = useState('');
 
   // Theme state
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -49,11 +53,13 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // Auto-detect template type when content changes
-    if (templateContent) {
+    // Auto-detect template type only when pasting into empty editor
+    // Don't auto-detect if user is actively editing (previousContent was not empty)
+    if (templateContent && previousContent === '') {
       const detectedType = detectTemplateType(templateContent);
       setTemplateType(detectedType);
     }
+    setPreviousContent(templateContent);
   }, [templateContent]);
 
   useEffect(() => {
@@ -90,6 +96,22 @@ export default function Home() {
       setRenderedContent('');
     }
   }, [templateContent, dummyData]);
+
+  // Validate template when content or type changes
+  useEffect(() => {
+    if (templateContent) {
+      // Use a debounce to avoid validating on every keystroke
+      const timeoutId = setTimeout(() => {
+        // Validation excludes variable placeholders from SMS length count
+        const results = validateTemplate(templateContent, templateType);
+        setValidationResults(results);
+      }, 500);
+
+      return () => clearTimeout(timeoutId);
+    } else {
+      setValidationResults([]);
+    }
+  }, [templateContent, templateType]);
 
   // Also render push title if in push mode
   const renderedPushTitle = React.useMemo(() => {
@@ -162,6 +184,7 @@ export default function Home() {
   const handleClearEditor = () => {
     setTemplateContent('');
     setPushTitle('');
+    setPreviousContent(''); // Reset so auto-detection works on next paste
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -359,6 +382,11 @@ export default function Home() {
               </span>
             </div>
           </div>
+
+          {/* Validation Panel */}
+          {validationResults.length > 0 && (
+            <ValidationPanel results={validationResults} />
+          )}
         </div>
 
         {/* Draggable Divider */}

@@ -12,7 +12,7 @@ export function PushPreview({ title, content }: PushPreviewProps) {
     hour12: true
   });
 
-  const displayTitle = title || 'App Name';
+  const displayTitle = title || 'Salmon';
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full max-w-6xl mx-auto">
@@ -44,7 +44,7 @@ export function PushPreview({ title, content }: PushPreviewProps) {
                           <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
                         </svg>
                       </div>
-                      <span className="text-[11px] font-medium text-gray-600 flex-1 truncate">App Name</span>
+                      <span className="text-[11px] font-medium text-gray-600 flex-1 truncate">Salmon</span>
                       <span className="text-[11px] text-gray-500 flex-shrink-0">now</span>
                     </div>
 
@@ -115,7 +115,7 @@ export function PushPreview({ title, content }: PushPreviewProps) {
                           <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
                         </svg>
                       </div>
-                      <span className="text-xs font-medium text-gray-300 flex-1 truncate">App Name</span>
+                      <span className="text-xs font-medium text-gray-300 flex-1 truncate">Salmon</span>
                       <span className="text-xs text-gray-400 flex-shrink-0">now</span>
                     </div>
 

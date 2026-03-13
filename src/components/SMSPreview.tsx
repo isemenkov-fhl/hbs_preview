@@ -25,7 +25,7 @@ export function SMSPreview({ content }: SMSPreviewProps) {
             {/* Screen */}
             <div className="bg-white rounded-[2.5rem] overflow-hidden flex flex-col" style={{ height: '600px' }}>
               {/* Status Bar */}
-              <div className="bg-gray-50 px-6 py-3 flex justify-between items-center text-xs font-semibold flex-shrink-0">
+              <div className="bg-white px-6 py-3 flex justify-between items-center text-xs font-semibold flex-shrink-0 text-gray-900">
                 <span>{currentTime}</span>
                 <div className="flex items-center gap-1">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -38,25 +38,33 @@ export function SMSPreview({ content }: SMSPreviewProps) {
               </div>
 
               {/* Messages Header */}
-              <div className="bg-gray-100 px-4 py-3 border-b border-gray-200 flex-shrink-0">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                    S
+              <div className="bg-[#F7F7F7] px-4 py-2.5 border-b border-[#E5E5E5] flex-shrink-0">
+                <div className="flex items-center justify-between">
+                  <button className="text-[#007AFF] text-lg -ml-1">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <div className="flex flex-col items-center flex-1 -mt-1">
+                    <div className="w-11 h-11 bg-[#8E99B3] rounded-full flex items-center justify-center text-white text-lg font-normal mb-0.5">
+                      <svg className="w-7 h-7" fill="white" viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                      </svg>
+                    </div>
+                    <div className="font-semibold text-[17px] text-black -mt-0.5">Salmon</div>
                   </div>
-                  <div>
-                    <div className="font-semibold text-sm">Sender</div>
-                  </div>
+                  <div className="w-6"></div>
                 </div>
               </div>
 
               {/* Message Content */}
-              <div className="p-4 bg-white flex-1 overflow-y-auto">
+              <div className="px-3 py-2 bg-white flex-1 overflow-y-auto">
                 <div className="flex flex-col items-start mb-2">
-                  <div className="text-[11px] text-gray-500 mb-1.5 text-center w-full">{currentTime}</div>
-                  <div className="bg-gray-200 rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%] shadow-sm">
-                    <p className="text-[15px] leading-relaxed text-gray-900 whitespace-pre-wrap break-words">{content}</p>
+                  <div className="text-[13px] text-[#8E8E93] mb-1.5 text-center w-full font-normal">{currentTime}</div>
+                  <div className="bg-[#E9E9EB] rounded-[20px] rounded-tl-[4px] px-3.5 py-2 max-w-[85%]">
+                    <p className="text-[17px] leading-[22px] text-black whitespace-pre-wrap break-words font-normal">{content}</p>
                   </div>
-                  <div className="text-[11px] text-gray-500 mt-1">Delivered</div>
+                  <div className="text-[13px] text-[#8E8E93] mt-0.5 ml-0.5 font-normal">Delivered</div>
                 </div>
               </div>
 
@@ -127,7 +135,7 @@ export function SMSPreview({ content }: SMSPreviewProps) {
                     S
                   </div>
                   <div className="flex-1">
-                    <div className="font-medium text-sm">Sender</div>
+                    <div className="font-medium text-sm">Salmon</div>
                   </div>
                 </div>
               </div>
